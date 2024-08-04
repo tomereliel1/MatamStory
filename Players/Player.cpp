@@ -15,3 +15,7 @@ int Player::getForce() const {
 int Player::getHealthPoints() const {
     return m_currentHP;
 }
+
+int Player::getCoins() const {
+    return m_coins;
+}
