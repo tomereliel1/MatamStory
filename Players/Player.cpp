@@ -1,5 +1,11 @@
 #include "Player.h"
 
+string Player::getDescription() const {
+    string description = m_name + ", " + m_job + " with " + m_character.getType() + " character (level "+
+            std::to_string(m_level) + ", force " + std::to_string(m_force);
+    return description;
+}
+
 string Player::getName() const {
     return m_name;
 }

@@ -1,6 +1,6 @@
 
 #pragma once
-
+#include "Character.h"
 #include <string>
 
 using std::string;
@@ -8,11 +8,13 @@ using std::string;
 class Player {
 private:
     string m_name;
-    unsigned int m_force;
+    int m_force;
     int m_currentHP;
     int m_maxHP;
     int m_level;
     int m_coins;
+    string m_job;
+    Character m_character;
 public:
     /**
      * Gets the description of the player
@@ -55,4 +57,6 @@ public:
      * @return - coins of the player
     */
     int getCoins() const;
+
+    Player(const string & name)
 };
