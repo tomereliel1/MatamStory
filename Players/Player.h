@@ -6,6 +6,13 @@
 using std::string;
 
 class Player {
+private:
+    string m_name;
+    unsigned int m_force;
+    int m_currentHP;
+    int m_maxHP;
+    int m_level;
+    int m_coins
 public:
     /**
      * Gets the description of the player
