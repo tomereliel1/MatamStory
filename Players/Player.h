@@ -1,20 +1,24 @@
 
 #pragma once
 #include "Character.h"
+#include "Job.h"
 #include <string>
-
+#include <memory>
+using std::unique_ptr;
 using std::string;
+
 
 class Player {
 private:
-    string m_name;
-    int m_force;
-    int m_currentHP;
-    int m_maxHP;
+protected:
+    const string m_name;
     int m_level;
+    int m_force;
+    int m_maxHP;
+    int m_currentHP;
     int m_coins;
-    string m_job;
-    Character m_character;
+    unique_ptr<Job> m_job;
+    unique_ptr<Character> m_character;
 public:
     /**
      * Gets the description of the player
@@ -58,5 +62,7 @@ public:
     */
     int getCoins() const;
 
-    Player(const string & name)
+    Player(string& name,unique_ptr<Job> job, unique_ptr<Character> character);
+
+    virtual void applySolarEclipse();
 };
