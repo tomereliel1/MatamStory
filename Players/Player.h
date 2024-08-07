@@ -2,9 +2,10 @@
 #pragma once
 #include "Character.h"
 #include "Job.h"
+#include "JobFactory.h"
 #include <string>
 #include <memory>
-using std::unique_ptr;
+using std::shared_ptr;
 using std::string;
 
 
@@ -17,9 +18,11 @@ protected:
     int m_maxHP;
     int m_currentHP;
     int m_coins;
-    unique_ptr<Job> m_job;
-    unique_ptr<Character> m_character;
+    shared_ptr<Job> m_job;
+    shared_ptr<Character> m_character;
+    JobFactory m_jobFactory;
 public:
+     ~Player() = default;
     /**
      * Gets the description of the player
      *
@@ -62,7 +65,9 @@ public:
     */
     int getCoins() const;
 
-    Player(string& name,unique_ptr<Job> job, unique_ptr<Character> character);
+    shared_ptr<Job> getJob();
 
-    virtual void applySolarEclipse();
+    Player(string name,string job, string character);
+
+
 };
