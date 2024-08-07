@@ -4,5 +4,6 @@ using std::string;
 class Character{
 
 public:
+    Character() =default;
     virtual string getType() const;
 };
