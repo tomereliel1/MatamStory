@@ -2,8 +2,11 @@
 #include <string>
 using std::string;
 class Character{
+protected:
+    string m_type;
 
 public:
-    Character() =default;
+    explicit Character(string &type);
     virtual string getType() const;
+    virtual ~Character() = default;
 };

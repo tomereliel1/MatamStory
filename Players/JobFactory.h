@@ -1,10 +1,20 @@
 #pragma once
 #include <string>
-#include "Job.h"
 #include <memory>
-using std::string;
+#include "Factory.h"
+#include "Job.h"
+#include "Warrior.h"
+#include "Magician.h"
+#include "Archer.h"
 using std::shared_ptr;
-class JobFactory{
+using std::string;
+
+
+
+
+class JobFactory : public Factory<Job> {
 public:
-    shared_ptr<Job> create(string job);
+   shared_ptr<Job> create(string& type) const override;
+   ~JobFactory()() override = default;
 };
+

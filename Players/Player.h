@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "Job.h"
 #include "JobFactory.h"
+#include "CharacterFactory.h"
 #include <string>
 #include <memory>
 using std::shared_ptr;
@@ -21,6 +22,7 @@ protected:
     shared_ptr<Job> m_job;
     shared_ptr<Character> m_character;
     JobFactory m_jobFactory;
+    CharacterFactory m_characterFactory;
 public:
      ~Player() = default;
     /**

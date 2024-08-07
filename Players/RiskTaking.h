@@ -1,8 +1,10 @@
-//
-// Created by tomer on 8/4/2024.
-//
+#pragma once
+#include "Character.h"
+#include <string>
+using std::string;
+class RiskTaking :public Character{
+public:
+    explicit RiskTaking(string& type);
 
-#ifndef HW4_RISKTAKING_H
-#define HW4_RISKTAKING_H
-
-#endif //HW4_RISKTAKING_H
+    ~RiskTaking() override = default;
+};

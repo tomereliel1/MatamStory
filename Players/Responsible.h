@@ -1,8 +1,10 @@
-//
-// Created by tomer on 8/4/2024.
-//
+#pragma once
+#include "Character.h"
+#include <string>
+using std::string;
+class Responsible :public Character{
+public:
+    explicit Responsible(string& type);
 
-#ifndef HW4_RESPONSIBLE_H
-#define HW4_RESPONSIBLE_H
-
-#endif //HW4_RESPONSIBLE_H
+    ~Responsible() override = default;
+};
