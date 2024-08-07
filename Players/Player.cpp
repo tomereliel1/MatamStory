@@ -47,3 +47,18 @@ shared_ptr<Job> Player::getJob() {
     return m_job;
 }
 
+void Player::setLevel(const int &level) {
+    m_level = level;
+}
+
+void Player::setForce(const int &force) {
+    m_force = force;
+}
+
+void Player::setHP(const int &hp) {
+    m_currentHP = hp;
+}
+
+void Player::setCoins(const int &coins) {
+    m_Coins = coins;
+}

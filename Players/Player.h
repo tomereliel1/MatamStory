@@ -71,5 +71,12 @@ public:
 
     Player(string name,string job, string character);
 
+    void setLevel(const int& level);
+
+    void setForce(const int& force);
+
+    void setHP(const int& HP);
+
+    void setCoins(const int& level);
 
 };
