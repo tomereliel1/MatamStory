@@ -5,11 +5,11 @@
 using std::unique_ptr;
 using std::string;
 
-Player::Player(string &name, unique_ptr<Job> job, unique_ptr<Character> character) : m_name(name),
+Player::Player(string name, string job, string character) : m_name(name),
                                                                                      m_level(1),
                                                                                      m_force(5) {
-    m_job = std::move(job);
-    m_character = std::move(character);
+    m_job = m_jobFactory.create(job);
+    m_character = m_characterFactory.create(character);
     m_maxHP = m_job->getMaxHP();
     m_currentHP = m_maxHP;
     m_coins = m_job->getCoins();
@@ -42,3 +42,8 @@ int Player::getHealthPoints() const {
 int Player::getCoins() const {
     return m_coins;
 }
+
+shared_ptr<Job> Player::getJob() {
+    return m_job;
+}
+
