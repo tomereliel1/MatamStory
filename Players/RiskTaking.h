@@ -4,7 +4,7 @@
 using std::string;
 class RiskTaking :public Character{
 public:
-    explicit RiskTaking(string& type);
+    explicit RiskTaking();
 
     ~RiskTaking() override = default;
 };

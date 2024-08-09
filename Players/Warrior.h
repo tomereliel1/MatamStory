@@ -4,7 +4,7 @@
 using std::string;
 class Warrior :public Job{
 public:
-    explicit Warrior(string& type);
+    explicit Warrior();
 
     int getMaxHP() const override;
 

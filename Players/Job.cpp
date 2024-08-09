@@ -1,5 +1,5 @@
 #include "Job.h"
-Job::Job(string &type): m_type(type){}
+Job::Job(string type): m_type(type){}
 
 int Job::getMaxHP() const{
     return 100;

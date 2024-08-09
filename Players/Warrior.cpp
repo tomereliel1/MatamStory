@@ -1,6 +1,6 @@
 #include "Warrior.h"
 
-Warrior::Warrior(string &type): Job(type){}
+Warrior::Warrior(): Job("Warrior"){}
 
 int Warrior::getMaxHP() const {
     return 150;

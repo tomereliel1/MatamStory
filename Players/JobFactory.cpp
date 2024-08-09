@@ -8,14 +8,11 @@ using std::shared_ptr;
 
 shared_ptr<Job> JobFactory::create(string& type) const {
     if (type == "Warrior"){
-        shared_ptr<Job> newJob(new Warrior(type));
-        return newJob;
+        return m_warrior;
     } else if (type == "Magician"){
-        shared_ptr<Job> newJob(new Magician(type));
-        return newJob;
+        return m_magician;
     } else if (type == "Archer"){
-        shared_ptr<Job> newJob(new Archer(type));
-        return newJob;
+        return m_archer;
     }
     throw std::runtime_error("No such Job");
 }

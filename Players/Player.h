@@ -6,7 +6,7 @@
 #include "CharacterFactory.h"
 #include <string>
 #include <memory>
-using std::shared_ptr;
+using std::unique_ptr;
 using std::string;
 
 

@@ -1,18 +1,24 @@
 #include "Player.h"
 #include <string>
 #include <memory>
-
+#include <stdexcept>
 using std::unique_ptr;
 using std::string;
 
 Player::Player(string name, string job, string character) : m_name(name),
                                                                                      m_level(1),
                                                                                      m_force(5) {
-    m_job = m_jobFactory.create(job);
-    m_character = m_characterFactory.create(character);
-    m_maxHP = m_job->getMaxHP();
-    m_currentHP = m_maxHP;
-    m_coins = m_job->getCoins();
+    try {
+        m_job = m_jobFactory.create(job);
+        m_character = m_characterFactory.create(character);
+        m_maxHP = m_job->getMaxHP();
+        m_currentHP = m_maxHP;
+        m_coins = m_job->getCoins();
+    }
+    catch (...){
+        throw std::runtime_error("Error in file");
+    }
+
 }
 
 
@@ -60,5 +66,5 @@ void Player::setHP(const int &hp) {
 }
 
 void Player::setCoins(const int &coins) {
-    m_Coins = coins;
+    m_coins = coins;
 }
