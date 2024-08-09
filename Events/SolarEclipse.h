@@ -1,8 +1,13 @@
-//
-// Created by tomer on 8/4/2024.
-//
+#include "SpecialEvent.h"
+#pragma once
+#include <string>
+using std::string;
 
-#ifndef HW4_SOLARECLIPSE_H
-#define HW4_SOLARECLIPSE_H
+class SolarEclipse : SpecialEvent {
 
-#endif //HW4_SOLARECLIPSE_H
+public:
+
+    void playEvent( Player& player) const override;
+
+    explicit SolarEclipse(string & type);
+};

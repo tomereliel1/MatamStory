@@ -1,4 +1,5 @@
 #pragma once
+#include "Player.h"
 #include <string>
 using std::string;
 class Character{
@@ -8,5 +9,6 @@ protected:
 public:
     explicit Character(string type);
     virtual string getType() const;
+    virtual void applyPotionsMerchant( Player &player );
     virtual ~Character() = default;
 };

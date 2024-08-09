@@ -1,3 +1,7 @@
-//
-// Created by meshi on 09/08/2024.
-//
+#include "specialEvent.h"
+#include <string>
+using std::string;
+
+
+SpecialEvent::SpecialEvent(string &type) : Event(type) {}
+

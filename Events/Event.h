@@ -16,5 +16,7 @@ public:
     */
     string getDescription() const;
 
-    void playEvent(const Player& player);
+    virtual void playEvent( Player& player) const = 0;
+
+    virtual ~Event() = default;
 };

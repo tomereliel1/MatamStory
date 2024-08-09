@@ -1,8 +1,11 @@
-//
-// Created by tomer on 8/4/2024.
-//
+#pragma once
+#include "Event.h"
+#include <string>
+using std::string;
 
-#ifndef HW4_SPECIALEVENT_H
-#define HW4_SPECIALEVENT_H
+class SpecialEvent :public Event{
+public:
 
-#endif //HW4_SPECIALEVENT_H
+    explicit SpecialEvent(string & type);
+};
+

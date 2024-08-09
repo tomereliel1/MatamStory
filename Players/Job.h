@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Player.h"
 using std::string;
 
 class Job{
@@ -10,6 +11,7 @@ public:
     virtual int getMaxHP() const;
     virtual int  getCoins() const;
     virtual int getCombatPower(int force, int level) const;
+    virtual void applySolarEclipe( Player &player );
     string getType() const;
 
     virtual ~Job() = default;

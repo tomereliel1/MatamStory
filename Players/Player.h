@@ -67,7 +67,11 @@ public:
     */
     int getCoins() const;
 
+    int getMaxHealthPoints() const;
+
     shared_ptr<Job> getJob();
+
+    shared_ptr<Character> getCharacter();
 
     Player(string name,string job, string character);
 

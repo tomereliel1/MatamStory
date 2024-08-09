@@ -45,12 +45,20 @@ int Player::getHealthPoints() const {
     return m_currentHP;
 }
 
+int Player::getMaxHealthPoints() const {
+    return m_maxHP;
+}
+
 int Player::getCoins() const {
     return m_coins;
 }
 
 shared_ptr<Job> Player::getJob() {
     return m_job;
+}
+
+shared_ptr<Character> Player::getCharacter() {
+    return m_character;
 }
 
 void Player::setLevel(const int &level) {
@@ -68,3 +76,5 @@ void Player::setHP(const int &hp) {
 void Player::setCoins(const int &coins) {
     m_coins = coins;
 }
+
+

@@ -16,3 +16,9 @@ int Job::getCombatPower(int force, int level) const {
 string Job::getType() const {
     return m_type;
 }
+
+void Job::applySolarEclipe(Player &player) {
+    int currentForce=player.getForce();
+    currentForce--;
+    player.setForce(currentForce);
+}
