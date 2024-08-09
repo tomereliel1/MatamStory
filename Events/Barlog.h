@@ -1,8 +1,9 @@
-//
-// Created by tomer on 8/4/2024.
-//
+#pragma once
+#include "Encounter.h"
+#include <string>
+using std::string;
+class Barlog :public Encounter{
+public:
+    explicit Barlog(string & type);
+};
 
-#ifndef HW4_BARLOG_H
-#define HW4_BARLOG_H
-
-#endif //HW4_BARLOG_H

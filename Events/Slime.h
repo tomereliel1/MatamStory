@@ -1,8 +1,9 @@
-//
-// Created by tomer on 8/4/2024.
-//
+#pragma once
+#include "Encounter.h"
+#include <string>
+using std::string;
+class Slime :public Encounter{
+public:
+    explicit Slime(string & type);
+};
 
-#ifndef HW4_SLIME_H
-#define HW4_SLIME_H
-
-#endif //HW4_SLIME_H
