@@ -10,7 +10,5 @@ public:
 
     int getCombatPower(int force, int level) const override;
 
-    void applySolarEclipe(Player &player) override;
-
     ~Warrior() override = default;
 };
