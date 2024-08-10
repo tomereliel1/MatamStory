@@ -8,6 +8,6 @@ protected:
     int m_loot;
     int m_damage;
 public:
-    explicit Encounter(string & type);
+    explicit Encounter(string& type);
 };
 

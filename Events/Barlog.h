@@ -4,6 +4,6 @@
 using std::string;
 class Barlog :public Encounter{
 public:
-    explicit Barlog(string & type);
+    explicit Barlog(string& type);
 };
 

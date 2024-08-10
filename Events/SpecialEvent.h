@@ -5,7 +5,7 @@ using std::string;
 
 class SpecialEvent :public Event{
 public:
-
-    explicit SpecialEvent(string & type);
+    explicit SpecialEvent(string &type);
 };
+
 

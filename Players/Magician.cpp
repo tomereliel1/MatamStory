@@ -2,7 +2,7 @@
 
 Magician::Magician(string& type): Job(type){}
 
-void Magician::applySolarEclipe(Player &player) {
+void Magician::applySolarEclipse(Player &player) {
     int currentForce=player.getForce();
     currentForce++;
     player.setForce(currentForce);

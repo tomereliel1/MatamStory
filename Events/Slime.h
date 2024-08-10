@@ -6,4 +6,3 @@ class Slime :public Encounter{
 public:
     explicit Slime(string & type);
 };
-

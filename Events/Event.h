@@ -8,7 +8,7 @@ private:
     string m_type;
 public:
 
-    explicit Event (string & type);
+    explicit Event (string& type);
     /**
      * Gets the description of the event
      *

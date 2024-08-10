@@ -1,12 +1,10 @@
-#include "SpecialEvent.h"
 #pragma once
+#include "SpecialEvent.h"
 #include <string>
 using std::string;
-
-class PotionsMerchant : SpecialEvent {
-
+class PotionsMerchant : public SpecialEvent{
 public:
-    void playEvent( Player& player) const override;
-
     explicit PotionsMerchant(string & type);
+    void playEvent( Player& player) const override;
 };
+

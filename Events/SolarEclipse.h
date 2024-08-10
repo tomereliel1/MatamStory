@@ -1,13 +1,11 @@
-#include "SpecialEvent.h"
 #pragma once
+#include "SpecialEvent.h"
 #include <string>
 using std::string;
-
-class SolarEclipse : SpecialEvent {
+class SolarEclipse :public SpecialEvent{
 
 public:
-
-    void playEvent( Player& player) const override;
-
     explicit SolarEclipse(string & type);
+    void playEvent( Player& player) const override;
 };
+

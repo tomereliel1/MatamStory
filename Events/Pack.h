@@ -3,8 +3,8 @@
 #include <string>
 #include <memory>
 using std::string;
-class Barlog :public Encounter{
+class Pack :public Encounter{
 public:
-    explicit Barlog(string & type);
+    explicit Pack();
 };
 

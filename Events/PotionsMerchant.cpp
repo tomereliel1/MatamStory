@@ -3,12 +3,8 @@
 using std::string;
 
 
-PotionsMerchant::PotionsMerchant(string &type):SpecialEvent(type) {}
+PotionsMerchant::PotionsMerchant(string & type):SpecialEvent(type) {}
 
 void PotionsMerchant::playEvent( Player &player) const {
-
-     std::shared_ptr<Character> currentCharacter = player.getCharacter();
-
-     currentCharacter->applyPotionsMerchant(player);
-
+    player.getCharacter()->applyPotionsMerchant(player);
 }

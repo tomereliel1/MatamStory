@@ -11,7 +11,7 @@ public:
     virtual int getMaxHP() const;
     virtual int  getCoins() const;
     virtual int getCombatPower(int force, int level) const;
-    virtual void applySolarEclipe( Player &player );
+    virtual void applySolarEclipse( Player &player );
     string getType() const;
 
     virtual ~Job() = default;
