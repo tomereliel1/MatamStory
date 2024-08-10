@@ -8,3 +8,4 @@ SolarEclipse::SolarEclipse(string &type) : SpecialEvent(type) {}
 void SolarEclipse::playEvent( Player &player) const {
     player.getJob()->applySolarEclipse(player);
 }
+
