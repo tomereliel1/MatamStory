@@ -1,7 +1,8 @@
 #include "PotionsMerchant.h"
-
+#include "Player.h"
 #include <string>
 using std::string;
+
 
 
 PotionsMerchant::PotionsMerchant(string & type):SpecialEvent(type) {}
