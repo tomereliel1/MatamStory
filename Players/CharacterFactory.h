@@ -1,18 +1,19 @@
 #pragma once
 #include <string>
 #include <memory>
+#include <map>
 #include "Factory.h"
 #include "Character.h"
-#include "RiskTaking.h"
-#include "Responsible.h"
+
 using std::shared_ptr;
 using std::string;
 using std::make_shared;
 
 class CharacterFactory : public Factory<Character> {
-    shared_ptr<Character> m_riskTaking = make_shared<RiskTaking>();
-    shared_ptr<Character> m_responsible = make_shared<Responsible>();
+private:
+    std::map<string, shared_ptr<Character>> m_characters;
 public:
-    shared_ptr<Character> create(string& type) const override;
+    CharacterFactory();
+    shared_ptr<Character> create(const string& type) override;
     ~CharacterFactory() override = default;
 };

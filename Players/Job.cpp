@@ -1,5 +1,6 @@
 #include "Job.h"
-Job::Job(string type): m_type(type){}
+#include "Player.h"
+Job::Job(const string& type): m_type(type){}
 
 int Job::getMaxHP() const{
     return 100;
@@ -18,7 +19,13 @@ string Job::getType() const {
 }
 
 void Job::applySolarEclipse(Player &player) {
-    int currentForce=player.getForce();
+    int currentForce= player.getForce();
     currentForce--;
     player.setForce(currentForce);
+}
+
+void Job::playerWon(Player &player) const {
+    int currentLevel = player.getLevel();
+    currentLevel++;
+    player.setLevel(currentLevel);
 }
