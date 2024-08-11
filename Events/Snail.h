@@ -5,5 +5,6 @@ using std::string;
 class Snail :public Encounter{
 public:
     explicit Snail(string & type);
+
 };
 
