@@ -1,7 +1,9 @@
 #include "RiskTaking.h"
+#include "Player.h"
 using std::string;
+const string str = "RiskTaking";
 
-RiskTaking::RiskTaking():Character("RiskTaking"){}
+RiskTaking::RiskTaking():Character(str){}
 
 void RiskTaking::applyPotionsMerchant(Player &player) {
 

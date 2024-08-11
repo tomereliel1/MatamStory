@@ -1,7 +1,9 @@
 #include "Responsible.h"
+#include "Player.h"
 using std::string;
+const string str = "Responsible";
 
-Responsible::Responsible():Character("Responsible"){}
+Responsible::Responsible():Character(str){}
 
 void Responsible::applyPotionsMerchant(Player &player) {
 
