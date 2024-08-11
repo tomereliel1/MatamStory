@@ -1,6 +1,7 @@
 #include "Magician.h"
-
-Magician::Magician(string& type): Job(type){}
+#include "Player.h"
+const string str = "Magician";
+Magician::Magician(): Job(str){}
 
 void Magician::applySolarEclipse(Player &player) {
     int currentForce=player.getForce();

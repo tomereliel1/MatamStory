@@ -4,7 +4,7 @@
 using std::string;
 class Magician :public Job{
 public:
-    explicit Magician(string & type);
+    explicit Magician();
 
     void applySolarEclipse(Player &player) override;
 

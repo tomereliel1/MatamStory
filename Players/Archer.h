@@ -4,7 +4,7 @@
 using std::string;
 class Archer :public Job{
 public:
-    explicit Archer(string & type);
+    explicit Archer();
 
     int getCoins() const override;
     ~Archer() override = default;

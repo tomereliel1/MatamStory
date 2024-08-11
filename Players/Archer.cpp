@@ -1,6 +1,7 @@
 #include "Archer.h"
+const string str = "Archer";
 
-Archer::Archer(string& type): Job(type){}
+Archer::Archer(): Job(str){}
 
 int Archer::getCoins() const {
     return 20;
