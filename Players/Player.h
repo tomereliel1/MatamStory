@@ -2,11 +2,9 @@
 #pragma once
 #include "Character.h"
 #include "Job.h"
-#include "JobFactory.h"
-#include "CharacterFactory.h"
 #include <string>
 #include <memory>
-using std::unique_ptr;
+using std::shared_ptr;
 using std::string;
 
 
@@ -16,13 +14,11 @@ protected:
     const string m_name;
     int m_level;
     int m_force;
+    shared_ptr<Job> m_job;
+    shared_ptr<Character> m_character;
     int m_maxHP;
     int m_currentHP;
     int m_coins;
-    shared_ptr<Job> m_job;
-    shared_ptr<Character> m_character;
-    JobFactory m_jobFactory;
-    CharacterFactory m_characterFactory;
 public:
      ~Player() = default;
     /**
@@ -69,11 +65,13 @@ public:
 
     int getMaxHealthPoints() const;
 
+    int getCombatPower() const;
+
     shared_ptr<Job> getJob();
 
     shared_ptr<Character> getCharacter();
 
-    Player(string name,string job, string character);
+    Player(string name,shared_ptr<Job> job, shared_ptr<Character> character);
 
     void setLevel(const int& level);
 
@@ -82,5 +80,7 @@ public:
     void setHP(const int& HP);
 
     void setCoins(const int& level);
+
+    void playerLost(int damage);
 
 };
