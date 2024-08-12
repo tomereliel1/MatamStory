@@ -5,8 +5,8 @@ const string str = "RiskTaking";
 
 RiskTaking::RiskTaking():Character(str){}
 
-void RiskTaking::applyPotionsMerchant(Player &player) {
-
+int RiskTaking::applyPotionsMerchant(Player &player) {
+    int potionsPurchased = 0;
     int currentCoins = player.getCoins();
     int currentHP = player.getHealthPoints();
 
@@ -15,5 +15,7 @@ void RiskTaking::applyPotionsMerchant(Player &player) {
         currentHP+=10;
         player.setCoins(currentCoins);
         player.setHP(currentHP);
+        potionsPurchased++;
     }
+    return potionsPurchased;
 }

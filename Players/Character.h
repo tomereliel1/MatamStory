@@ -9,6 +9,6 @@ protected:
 public:
     explicit Character(const string& type);
     virtual string getType() const;
-    virtual void applyPotionsMerchant( Player &player ) = 0;
+    virtual int applyPotionsMerchant( Player &player ) = 0;
     virtual ~Character() = default;
 };

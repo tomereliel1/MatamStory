@@ -1,13 +1,14 @@
 #include "PotionsMerchant.h"
 #include "Player.h"
-#include <string>
+#include "Utilities.h"
 using std::string;
 
 const string str = "PotionMerchant";
 
 PotionsMerchant::PotionsMerchant():SpecialEvent(str) {}
 
-void PotionsMerchant::playEvent( Player &player) {
-    player.getCharacter()->applyPotionsMerchant(player);
+string PotionsMerchant::playEvent( Player &player) {
+    int potionsPurchased = player.getCharacter()->applyPotionsMerchant(player);
+    return getPotionsPurchaseMessage(player, potionsPurchased);
 }
 

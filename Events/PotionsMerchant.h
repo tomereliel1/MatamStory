@@ -5,6 +5,6 @@ using std::string;
 class PotionsMerchant : public SpecialEvent{
 public:
     PotionsMerchant();
-    void playEvent( Player& player) override;
+    string playEvent( Player& player) override;
 };
 

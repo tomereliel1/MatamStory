@@ -6,7 +6,7 @@ class Responsible :public Character{
 public:
     explicit Responsible();
 
-    void applyPotionsMerchant(Player &player) override;
+    int applyPotionsMerchant(Player &player) override;
 
     ~Responsible() override = default;
 };
