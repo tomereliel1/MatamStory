@@ -14,49 +14,34 @@
 using std::string;
 using std::unique_ptr;
 
-unique_ptr<Event> EventFactory::create(string& type) const {
-    if (type == "SolarEclipse"){
-        unique_ptr<Event> newEvent(new SolarEclipse(type));
-        return newEvent;
-    } else if (type == "PotionMerchant"){
-        unique_ptr<Event> newEvent(new PotionsMerchant(type));
-        return newEvent;
-    } else if (type == "Snail"){
-        unique_ptr<Event> newEvent(new Snail(type));
-        return newEvent;
-    } else if (type == "Slime"){
-        //unique_ptr<Event> newEvent(new Slime(type));
-        //return newEvent;
-    } else if (type == "Barlog"){
-        //unique_ptr<Event> newEvent(new Barlog(type));
-        //return newEvent;
-    } else if (checkPack(type)){
-        return createPack(type);
-    }
-    throw std::runtime_error("No such Event");
+EventFactory::EventFactory() {
+    m_creators["SolarEclipse"] = []() { return std::make_unique<SolarEclipse>(); };
+    m_creators["PotionMerchant"] = []() { return std::make_unique<PotionsMerchant>(); };
+    m_creators["Snail"] = []() { return std::make_unique<Snail>(); };
+    m_creators["Slime"] = []() { return std::make_unique<Slime>(); };
+    m_creators["Barlog"] = []() { return std::make_unique<Barlog>(); };
 }
 
-bool EventFactory::checkPack(std::string &type) {
-    string pack = "Pack";
-    for (int i = 0 ; i < 4 ; i++){
-        if (pack[i] != type[i]){
-            return false;
-        }
-    }
-    return true;
-}
-
-unique_ptr<Event> EventFactory::createPack(string& type) const {
-    std::vector<unique_ptr<Event>> subMonsters;
-    std::istringstream iss(type);
+unique_ptr<Event> EventFactory::create(std::ifstream &file) const {
     string word;
-    iss >> word;
-    int monsterNumber;
-    iss >> monsterNumber;
-    for (int i = 0 ; i < monsterNumber; i++){
-        iss >> word;
-        subMonsters.push_back(create(word));
+    file >> word;
+    if (word == "Pack"){
+        return createPack(file);
+    } else if (m_creators.find(word) != m_creators.end()){
+        return m_creators.find(word)->second();
+    } else {
+        throw std::runtime_error("Invalid Event File");
     }
-    return std::make_unique<Pack>(type ,std::move(subMonsters));
+}
+
+unique_ptr<Event> EventFactory::createPack(std::ifstream &file) const {
+    std::vector<unique_ptr<Event>> subMonsters;
+    int monsterNumber;
+    file >> monsterNumber;
+    string  word;
+    for (int i = 0 ; i < monsterNumber; i++){
+        subMonsters.push_back(create(file));
+    }
+    return std::make_unique<Pack>(int monsterNumber, std::move(subMonsters));
 }
 
