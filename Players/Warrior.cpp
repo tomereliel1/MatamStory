@@ -11,11 +11,14 @@ int Warrior::getCombatPower(int force, int level) const {
     return (force * 2 + level);
 }
 
-void Warrior::playerWon(Player &player) const {
+void Warrior::playerWon(Player &player, int loot) const {
     int currentLevel = player.getLevel();
-    currentLevel++;
-    player.setLevel(currentLevel);
     int currentHP = player.getHealthPoints();
+    int currentCoins = player.getCoins();
+    currentLevel++;
     currentHP -= 10;
+    currentCoins += loot;
+    player.setLevel(currentLevel);
     player.setHP(currentHP);
+    player.setCoins(currentCoins);
 }

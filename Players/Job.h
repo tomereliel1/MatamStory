@@ -13,7 +13,7 @@ public:
     virtual int getCombatPower(int force, int level) const;
     virtual void applySolarEclipse( Player &player );
     string getType() const;
-    virtual void playerWon(Player & player) const;
+    virtual void playerWon(Player & player, int loot) const;
     virtual ~Job() = default;
 
 };

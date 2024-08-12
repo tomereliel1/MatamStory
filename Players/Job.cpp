@@ -24,8 +24,11 @@ void Job::applySolarEclipse(Player &player) {
     player.setForce(currentForce);
 }
 
-void Job::playerWon(Player &player) const {
+void Job::playerWon(Player &player, int loot) const {
     int currentLevel = player.getLevel();
+    int currentCoins = player.getCoins();
     currentLevel++;
+    currentCoins += loot;
     player.setLevel(currentLevel);
+    player.setCoins(currentCoins);
 }
