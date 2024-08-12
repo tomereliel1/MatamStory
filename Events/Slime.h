@@ -4,5 +4,5 @@
 using std::string;
 class Slime :public Encounter{
 public:
-    explicit Slime(string & type);
+    Slime();
 };

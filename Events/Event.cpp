@@ -3,4 +3,4 @@
 
 using std::string;
 
-Event::Event(string& type) : m_type(type){}
+Event::Event(const string& type) : m_type(type){}

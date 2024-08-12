@@ -3,7 +3,10 @@
 #include <string>
 using std::string;
 class Barlog :public Encounter{
+private:
+    void updateCombatPower() override;
 public:
-    explicit Barlog(string& type);
+    Barlog();
+    void playEvent(Player &player) override;
 };
 

@@ -5,7 +5,7 @@ using std::string;
 class SolarEclipse :public SpecialEvent{
 
 public:
-    explicit SolarEclipse(string & type);
-    void playEvent( Player& player) const override;
+    SolarEclipse();
+    void playEvent( Player& player) override;
 };
 

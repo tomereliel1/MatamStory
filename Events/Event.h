@@ -8,7 +8,7 @@ private:
     string m_type;
 public:
 
-    explicit Event (string& type);
+    explicit Event (const string& type);
     /**
      * Gets the description of the event
      *
@@ -16,7 +16,7 @@ public:
     */
     string getDescription() const;
 
-    virtual void playEvent( Player& player) const = 0;
+    virtual void playEvent( Player& player) = 0;
 
     virtual ~Event() = default;
 };

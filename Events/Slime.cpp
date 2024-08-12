@@ -2,7 +2,9 @@
 #include <string>
 using std::string;
 
-Slime::Slime(string & type) : Encounter(type){
+const string str = "Slime";
+
+Slime::Slime() : Encounter(str){
     m_combatPower = 12;
     m_loot = 5;
     m_damage = 25;

@@ -3,11 +3,11 @@
 #include <string>
 using std::string;
 
+const string str = "PotionMerchant";
 
+PotionsMerchant::PotionsMerchant():SpecialEvent(str) {}
 
-PotionsMerchant::PotionsMerchant(string & type):SpecialEvent(type) {}
-
-void PotionsMerchant::playEvent( Player &player) const {
+void PotionsMerchant::playEvent( Player &player) {
     player.getCharacter()->applyPotionsMerchant(player);
 }
 

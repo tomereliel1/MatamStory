@@ -5,7 +5,10 @@
 using std::string;
 using std::unique_ptr;
 using std::vector;
-Pack::Pack(std::string type, vector<unique_ptr<Event>> subMonsters) : Encounter(type)
+
+const string str = "Pack";
+Pack::Pack(int membersNum, vector<unique_ptr<Event>> subMonsters) : Encounter(str),
+    m_membersNum(membersNum)
 {
     for (std::vector<unique_ptr<Event>>::iterator it = subMonsters.begin(); it != subMonsters.end();
     ++it) {
@@ -30,6 +33,20 @@ void Pack::sumFields() {
     }
 }
 
-void Pack::playEvent(Player &player) const {
+void Pack::playEvent(Player &player){
+    if (player.getCombatPower() > m_combatPower){
+        player.getJob()->playerWon(player);
+    } else {
+        player.playerLost(m_damage);
+    }
+    updateCombatPower();
+}
 
+void Pack::updateCombatPower(){
+    int tempCombatPower = 0;
+    for (int i = 0; i < m_membersNum ; i++){
+        m_subMonsters[i]->updateCombatPower();
+        tempCombatPower += m_subMonsters[i]->getCombatPower();
+    }
+    m_combatPower = tempCombatPower;
 }

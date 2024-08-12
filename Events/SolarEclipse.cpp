@@ -2,10 +2,11 @@
 #include <string>
 using std::string;
 
+const string str = "SolarEclipse";
 
-SolarEclipse::SolarEclipse(string &type) : SpecialEvent(type) {}
+SolarEclipse::SolarEclipse() : SpecialEvent(str) {}
 
-void SolarEclipse::playEvent( Player &player) const {
+void SolarEclipse::playEvent( Player &player) {
     player.getJob()->applySolarEclipse(player);
 }
 
