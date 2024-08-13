@@ -10,9 +10,9 @@ using std::unique_ptr;
 class EventFactory {
 private:
     std::map<string, std::function<unique_ptr<Event>()>> m_creators;
-    unique_ptr<Event> createPack(std::ifstream & file) const;
+    unique_ptr<Event> createPack(std::istream & file) const;
 public:
     EventFactory();
-    unique_ptr<Event> create(std::ifstream & file) const;
+    unique_ptr<Event> create(std::istream & file) const;
     ~EventFactory() = default;
 };

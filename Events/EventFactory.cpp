@@ -10,20 +10,20 @@
 #include <stdexcept>
 #include <sstream>
 #include <vector>
-
+#include <iostream>
 using std::string;
 using std::unique_ptr;
 
 EventFactory::EventFactory() {
     m_creators["SolarEclipse"] = []() { return std::make_unique<SolarEclipse>(); };
-    m_creators["PotionMerchant"] = []() { return std::make_unique<PotionsMerchant>(); };
+    m_creators["PotionsMerchant"] = []() { return std::make_unique<PotionsMerchant>(); };
     m_creators["Snail"] = []() { return std::make_unique<Snail>(); };
     m_creators["Slime"] = []() { return std::make_unique<Slime>(); };
     m_creators["Barlog"] = []() { return std::make_unique<Barlog>(); };
 }
 
-unique_ptr<Event> EventFactory::create(std::ifstream &file) const {
-    string word;
+unique_ptr<Event> EventFactory::create(std::istream &file) const {
+    std::string word;
     file >> word;
     if (word == "Pack"){
         return createPack(file);
@@ -34,14 +34,20 @@ unique_ptr<Event> EventFactory::create(std::ifstream &file) const {
     }
 }
 
-unique_ptr<Event> EventFactory::createPack(std::ifstream &file) const {
-    std::vector<unique_ptr<Event>> subMonsters;
+unique_ptr<Event> EventFactory::createPack(std::istream &file) const {
+    std::vector<unique_ptr<Encounter>> subMonsters;
     int monsterNumber;
     file >> monsterNumber;
     string  word;
     for (int i = 0 ; i < monsterNumber; i++){
-        subMonsters.push_back(create(file));
+        unique_ptr<Event> event = create(file);
+        if (Encounter* encounter = dynamic_cast<Encounter*>(event.get())){
+            subMonsters.push_back(std::unique_ptr<Encounter>(encounter));
+            event.release();
+        } else {
+            throw std::runtime_error("Invalid Event File");
+        }
     }
-    return std::make_unique<Pack>(int monsterNumber, std::move(subMonsters));
+    return std::make_unique<Pack>(monsterNumber, std::move(subMonsters));
 }
 
