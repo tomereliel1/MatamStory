@@ -3,7 +3,7 @@
 #include "Utilities.h"
 using std::string;
 
-const string str = "PotionMerchant";
+const string str = "PotionsMerchant";
 
 PotionsMerchant::PotionsMerchant():SpecialEvent(str) {}
 
