@@ -8,38 +8,54 @@
 
 MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream)
     : m_turnIndex(1), jobFactory(), characterFactory(), eventFactory() {
+    int playersNum = 0;
+    try {
+        while (playersStream) {
+            std::shared_ptr<Player> player = createPlayer(playersStream);
+            if (player) {
+                m_players.push_back(player);
+                playersNum++;
+            }
+        }
 
-    while (playersStream) {
-         std::shared_ptr<Player> player = createPlayer(playersStream);
-        if (player) {
-            m_players.push_back(player);
+        if (playersNum < 2 || playersNum > 6) {
+            throw std::runtime_error("Invalid Event File");
+        }
+
+        while (eventsStream) {
+            std::unique_ptr<Event> event = createEvent(eventsStream);
+            if (event) {
+                m_events.push_back(event);
+            }
         }
     }
-
-    while (eventsStream) {
-        std::unique_ptr<Event> event = createEvent(eventsStream);
-        if (event) {
-            m_events.push_back(event);
-        }
+    catch(const std::runtime_error& error) {
+        throw;
     }
 }
-
 
 std::shared_ptr<Player> MatamStory::createPlayer(std::istream& playersStream) {
     string name, jobType, characterType;
-    int level, force;
 
-    playersStream >> name >> jobType >> characterType >> level >> force;
+    try {
+        playersStream >> name >> jobType ;
 
-    std::shared_ptr<Job> job = jobFactory.create(jobType);
-    std::shared_ptr<Character> character = characterFactory.create(characterType);
+        std::shared_ptr<Job> job = jobFactory.create(jobType);
+        std::shared_ptr<Character> character = characterFactory.create(characterType);
 
-    return std::make_shared<Player>(name, job, character);
+        return std::make_shared<Player>(name, job, character);
+    } catch(const std::runtime_error& error) {
+        throw;
+    }
+
 }
 
-
 std::unique_ptr<Event> MatamStory::createEvent(std::istream& eventsStream) {
-    return eventFactory.create(eventsStream);
+    try {
+        return eventFactory.create(eventsStream);
+    }  catch(const std::runtime_error& error) {
+        throw;
+    }
 }
 
 /*
