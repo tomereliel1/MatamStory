@@ -3,6 +3,7 @@
 
 #include "Utilities.h"
 
+
 #include <fstream>
 #include <sstream>
 
@@ -77,17 +78,30 @@ MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream) 
 
 
 void MatamStory::playTurn(Player& player) {
+    if (m_events.empty()) {
+        // end the game
+        return;
+    }
 
-    /**
-     * Steps to implement (there may be more, depending on your design):
-     * 1. Get the next event from the events list
-     * 2. Print the turn details with "printTurnDetails"
-     * 3. Play the event
-     * 4. Print the turn outcome with "printTurnOutcome"
-    */
+    std::unique_ptr<Event>& currentEvent = m_events[m_turnIndex % m_events.size()];
+
+    printTurnDetails(m_turnIndex, player, *currentEvent);
+
+    string outcome = currentEvent->playEvent(player);
+
+    printTurnOutcome(outcome);
 
     m_turnIndex++;
 }
+
+/**
+ * Steps to implement (there may be more, depending on your design):
+ * 1. Get the next event from the events list
+ * 2. Print the turn details with "printTurnDetails"
+ * 3. Play the event
+ * 4. Print the turn outcome with "printTurnOutcome"
+*/
+
 
 void MatamStory::playRound() {
 
