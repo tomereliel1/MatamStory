@@ -11,21 +11,24 @@ MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream)
     : m_turnIndex(1), jobFactory(), characterFactory(), eventFactory() {
     int playersNum = 0;
     try {
-        while (playersStream) {
+        while (!playersStream.eof()) {
             std::shared_ptr<Player> player = createPlayer(playersStream);
             if (player) {
                 m_players.push_back(player);
                 playersNum++;
             }
+            if (playersNum > 6){
+                throw std::runtime_error("Invalid Event File");
+            }
         }
 
-        if (playersNum < 2 || playersNum > 6) {
+        if (playersNum < 2){
             throw std::runtime_error("Invalid Event File");
         }
 
         m_leaderBoard = m_players;
 
-        while (eventsStream) {
+        while (!eventsStream.eof()) {
             std::unique_ptr<Event> event = createEvent(eventsStream);
             if (event) {
                 m_events.push_back(std::move(event));
@@ -41,7 +44,7 @@ std::shared_ptr<Player> MatamStory::createPlayer(std::istream& playersStream) {
     string name, jobType, characterType;
 
     try {
-        playersStream >> name >> jobType ;
+        playersStream >> name >> jobType >> characterType ;
 
         std::shared_ptr<Job> job = jobFactory.create(jobType);
         std::shared_ptr<Character> character = characterFactory.create(characterType);
@@ -68,8 +71,9 @@ void MatamStory::playTurn(Player& player) {
         // end the game
         return;
     }
-
-    std::unique_ptr<Event>& currentEvent = m_events[m_turnIndex % m_events.size()];
+    int spot = (m_turnIndex-1) % m_events.size();
+    //std::cout << "Spot is" << spot << std::endl << std::endl;
+    std::unique_ptr<Event>& currentEvent = m_events[spot];
 
     printTurnDetails(m_turnIndex, player, *currentEvent);
 
@@ -89,16 +93,16 @@ void MatamStory::playRound() {
     for (shared_ptr<Player>& player : m_players) {
         if (player->getHealthPoints()!= 0){
             playTurn(*player);
-            m_turnIndex++;
         }
     }
     /*=============================================*/
     printRoundEnd();
-    std::sort(m_leaderBoard.begin(), m_leaderBoard.end());
+    std::sort(m_leaderBoard.begin(), m_leaderBoard.end(), [](const shared_ptr<Player>& firstPlayer,
+            const shared_ptr<Player>& secondPlayer) {return !(*firstPlayer < *secondPlayer);});
     printLeaderBoardMessage();
     int i = 1;
     for (shared_ptr<Player>& player : m_leaderBoard) {
-        printLeaderBoardEntry(i, *player);
+        printLeaderBoardEntry(i++, *player);
     }
     /*===== TODO: Print leaderboard entry for each player using "printLeaderBoardEntry" =====*/
 
@@ -107,11 +111,11 @@ void MatamStory::playRound() {
 }
 
 bool MatamStory::isGameOver() const {
+    if (hasWinner()){
+        return true;
+    }
     bool allHpZeros = true;
     for (const shared_ptr<Player>& player : m_players) {
-        if (hasWinner()){
-            return true;
-        }
         if (player->getHealthPoints() != 0){
             allHpZeros = false;
         }
@@ -122,9 +126,9 @@ bool MatamStory::isGameOver() const {
 void MatamStory::play() {
 
     printStartMessage();
-
-    for (int i = 0 ; i < m_players.size() ; i++) {
-        printStartPlayerEntry(i+1,*m_players[i]);
+    int i = 1;
+    for (shared_ptr<Player>& player : m_players) {
+        printStartPlayerEntry(i++,*player);
     }
 
     printBarrier();

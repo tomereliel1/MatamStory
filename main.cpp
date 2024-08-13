@@ -1,7 +1,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "Event.h"
 #include "MatamStory.h"
 
 using std::string;
