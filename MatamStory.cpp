@@ -59,25 +59,9 @@ std::unique_ptr<Event> MatamStory::createEvent(std::istream& eventsStream) {
     }
 }
 
-/*
-MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream) {
-
-    /*===== TODO: Open and read events file =====*/
-
-    /*==========================================*/
-
-
-    /*===== TODO: Open and Read players file =====*/
-
-    /*============================================*/
-
-/*
-    this->m_turnIndex = 1;
-}
-*/
-
 
 void MatamStory::playTurn(Player& player) {
+
     if (m_events.empty()) {
         // end the game
         return;
@@ -129,10 +113,13 @@ bool MatamStory::isGameOver() const {
 }
 
 void MatamStory::play() {
-    printStartMessage();
-    /*===== TODO: Print start message entry for each player using "printStartPlayerEntry" =====*/
 
-    /*=========================================================================================*/
+    printStartMessage();
+
+    for (int i = 0 ; i < m_players.size() ; i++) {
+        printStartPlayerEntry(i+1,*m_players[i]);
+    }
+
     printBarrier();
 
     while (!isGameOver()) {
@@ -140,7 +127,18 @@ void MatamStory::play() {
     }
 
     printGameOver();
-    /*===== TODO: Print either a "winner" message or "no winner" message =====*/
 
-    /*========================================================================*/
+    if (hasWinner()) {
+        printWinner(getWinner());
+    } else {
+        printNoWinners();
+    }
+
 }
+
+bool MatamStory::hasWinner() const {}
+
+std::shared_ptr<Player> MatamStory::getWinner() const {}
+
+
+
