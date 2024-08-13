@@ -3,6 +3,46 @@
 
 #include "Utilities.h"
 
+#include <fstream>
+#include <sstream>
+
+MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream)
+    : m_turnIndex(1), jobFactory(), characterFactory(), eventFactory() {
+
+    while (playersStream) {
+         std::shared_ptr<Player> player = createPlayer(playersStream);
+        if (player) {
+            m_players.push_back(player);
+        }
+    }
+
+    while (eventsStream) {
+        std::unique_ptr<Event> event = createEvent(eventsStream);
+        if (event) {
+            m_events.push_back(event);
+        }
+    }
+}
+
+
+std::shared_ptr<Player> MatamStory::createPlayer(std::istream& playersStream) {
+    string name, jobType, characterType;
+    int level, force;
+
+    playersStream >> name >> jobType >> characterType >> level >> force;
+
+    std::shared_ptr<Job> job = jobFactory.create(jobType);
+    std::shared_ptr<Character> character = characterFactory.create(characterType);
+
+    return std::make_shared<Player>(name, job, character);
+}
+
+
+std::unique_ptr<Event> MatamStory::createEvent(std::istream& eventsStream) {
+    return eventFactory.create(eventsStream);
+}
+
+/*
 MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream) {
 
     /*===== TODO: Open and read events file =====*/
@@ -14,9 +54,11 @@ MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream) 
 
     /*============================================*/
 
-
+/*
     this->m_turnIndex = 1;
 }
+*/
+
 
 void MatamStory::playTurn(Player& player) {
 
