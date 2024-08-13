@@ -26,7 +26,7 @@ MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream)
         while (eventsStream) {
             std::unique_ptr<Event> event = createEvent(eventsStream);
             if (event) {
-                m_events.push_back(event);
+                m_events.push_back(std::move(event));
             }
         }
     }
@@ -123,16 +123,16 @@ void MatamStory::playRound() {
 }
 
 bool MatamStory::isGameOver() const {
-    /*===== TODO: Implement the game over condition =====*/
-    for (std::vector<shared_ptr<Player>>::iterator it = m_players.begin(); it != m_palyers.end();
-    ++it) {
-        if (it)
-        unique_ptr<Encounter> encounter(it->release());
-        m_subMonsters.push_back(std::move(encounter));
+    bool allHpZeros = true;
+    for (const shared_ptr<Player>& player : m_players) {
+        if (player->getLevel() == 10){
+            return true;
+        }
+        if (player->getHealthPoints() != 0){
+            allHpZeros = false;
+        }
     }
-    sumFields();
-    return false; // Replace this line
-    /*===================================================*/
+    return allHpZeros;
 }
 
 void MatamStory::play() {
