@@ -73,6 +73,6 @@ public:
      * @return - void
     */
     void play();
-
-
+    bool hasWinner() const;
+    std::shared_ptr<Player> getWinner() const;
 };
