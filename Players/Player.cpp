@@ -77,3 +77,13 @@ void Player::playerLost(int damage) {
         m_currentHP -= damage;
     }
 }
+
+ bool operator < (const Player& player1, const Player& player2) {
+    if (player1.m_level != player2.m_level) {
+        return player1.m_level < player2.m_level;
+    }
+    if (player1.m_coins != player2.m_coins) {
+        return player1.m_coins < player2.m_coins;
+    }
+    return player1.m_name < player2.m_name;
+}

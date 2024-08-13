@@ -83,4 +83,7 @@ public:
 
     void playerLost(int damage);
 
+ friend bool operator < (const Player& player1, const Player& player2);
+
+
 };
