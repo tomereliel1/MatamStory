@@ -4,6 +4,7 @@
 #include "CharacterFactory.h"
 #include "Responsible.h"
 #include "RiskTaking.h"
+#include <iostream>
 using std::string;
 using std::shared_ptr;
 

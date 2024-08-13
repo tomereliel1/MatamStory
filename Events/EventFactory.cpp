@@ -2,7 +2,7 @@
 #include "EventFactory.h"
 #include "Slime.h"
 #include "Snail.h"
-#include "Barlog.h"
+#include "Balrog.h"
 #include "Pack.h"
 #include "SolarEclipse.h"
 #include "PotionsMerchant.h"
@@ -19,7 +19,7 @@ EventFactory::EventFactory() {
     m_creators["PotionsMerchant"] = []() { return std::make_unique<PotionsMerchant>(); };
     m_creators["Snail"] = []() { return std::make_unique<Snail>(); };
     m_creators["Slime"] = []() { return std::make_unique<Slime>(); };
-    m_creators["Barlog"] = []() { return std::make_unique<Barlog>(); };
+    m_creators["Balrog"] = []() { return std::make_unique<Balrog>(); };
 }
 
 unique_ptr<Event> EventFactory::create(std::istream &file) const {
@@ -30,7 +30,7 @@ unique_ptr<Event> EventFactory::create(std::istream &file) const {
     } else if (m_creators.find(word) != m_creators.end()){
         return m_creators.find(word)->second();
     } else {
-        throw std::runtime_error("Invalid Event File");
+        throw std::runtime_error("Invalid Events File");
     }
 }
 
