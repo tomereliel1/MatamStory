@@ -20,7 +20,7 @@ Encounter( "Pack of " +std::to_string(membersNum) + " members" ),
 }
 
 void Pack::sumFields() {
-    vector<unique_ptr<Encounter>>::const_iterator beginIterator = m_subMonsters.begin();
+    //vector<unique_ptr<Encounter>>::const_iterator beginIterator = m_subMonsters.begin();
     m_damage = 0;
     m_loot = 0;
     m_combatPower = 0;
