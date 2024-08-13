@@ -14,7 +14,7 @@ Player::Player(string name, shared_ptr<Job> job, shared_ptr<Character> character
 string Player::getDescription() const {
     string description = m_name + ", " + m_job->getType() + " with " + m_character->getType()
             + " character (level " + std::to_string(m_level) + ", force " +
-            std::to_string(m_force);
+            std::to_string(m_force) + ")";
     return description;
 }
 
