@@ -93,8 +93,10 @@ void MatamStory::playRound() {
 
     /*===== TODO: Play a turn for each player =====*/
     for (shared_ptr<Player>& player : m_players) {
-        playTurn(*player);
-        m_turnIndex++;
+        if (player->getHealthPoints()!= 0){
+            playTurn(*player);
+            m_turnIndex++;
+        }
     }
     /*=============================================*/
     printRoundEnd();
