@@ -30,7 +30,7 @@ MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream)
         }
     }
     catch(const std::runtime_error& error) {
-        throw;
+        throw error;
     }
 }
 
@@ -45,7 +45,7 @@ std::shared_ptr<Player> MatamStory::createPlayer(std::istream& playersStream) {
 
         return std::make_shared<Player>(name, job, character);
     } catch(const std::runtime_error& error) {
-        throw;
+        throw error;
     }
 
 }
@@ -54,7 +54,7 @@ std::unique_ptr<Event> MatamStory::createEvent(std::istream& eventsStream) {
     try {
         return eventFactory.create(eventsStream);
     }  catch(const std::runtime_error& error) {
-        throw;
+        throw error;
     }
 }
 
