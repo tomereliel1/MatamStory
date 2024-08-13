@@ -23,6 +23,8 @@ MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream)
             throw std::runtime_error("Invalid Event File");
         }
 
+        m_leaderBoard = m_players;
+
         while (eventsStream) {
             std::unique_ptr<Event> event = createEvent(eventsStream);
             if (event) {
@@ -78,14 +80,6 @@ void MatamStory::playTurn(Player& player) {
     m_turnIndex++;
 }
 
-/**
- * Steps to implement (there may be more, depending on your design):
- * 1. Get the next event from the events list
- * 2. Print the turn details with "printTurnDetails"
- * 3. Play the event
- * 4. Print the turn outcome with "printTurnOutcome"
-*/
-
 
 void MatamStory::playRound() {
 
@@ -115,7 +109,7 @@ void MatamStory::playRound() {
 bool MatamStory::isGameOver() const {
     bool allHpZeros = true;
     for (const shared_ptr<Player>& player : m_players) {
-        if (player->getLevel() == 10){
+        if (hasWinner()){
             return true;
         }
         if (player->getHealthPoints() != 0){
@@ -149,9 +143,20 @@ void MatamStory::play() {
 
 }
 
-bool MatamStory::hasWinner() const {}
+bool MatamStory::hasWinner() const {
 
-std::shared_ptr<Player> MatamStory::getWinner() const {}
+    for (const auto& player : m_leaderBoard) {
+        if (player->getLevel() == 10) {
+            return true;
+        }
+    }
+    return false;
+}
 
-
+std::shared_ptr<Player> MatamStory::getWinner() const {
+    if (hasWinner()) {
+        return m_leaderBoard[0];
+    }
+    return nullptr;
+}
 
