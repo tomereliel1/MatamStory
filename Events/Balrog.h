@@ -2,9 +2,9 @@
 #include "Encounter.h"
 #include <string>
 using std::string;
-class Barlog :public Encounter{
+class Balrog : public Encounter{
 public:
-    Barlog();
+    Balrog();
     void updateCombatPower() override;
     //void playEvent(Player &player) override;
 };

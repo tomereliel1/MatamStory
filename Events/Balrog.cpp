@@ -1,10 +1,10 @@
-#include "Barlog.h"
+#include "Balrog.h"
 #include <string>
 using std::string;
 
-const string str = "Barlog";
+const string str = "Balrog";
 
-Barlog::Barlog() : Encounter(str){
+Balrog::Balrog() : Encounter(str){
     m_combatPower = 15;
     m_loot = 100;
     m_damage = 9001;
@@ -20,6 +20,6 @@ void Barlog::playEvent(Player &player){
     updateCombatPower();
 }*/
 
-void Barlog::updateCombatPower(){
+void Balrog::updateCombatPower(){
     m_combatPower += 2;
 }
