@@ -6,6 +6,6 @@ class SolarEclipse :public SpecialEvent{
 
 public:
     SolarEclipse();
-    void playEvent( Player& player) override;
+    string playEvent( Player& player) override;
 };
 

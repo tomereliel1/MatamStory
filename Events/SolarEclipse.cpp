@@ -1,4 +1,5 @@
 #include "SolarEclipse.h"
+#include "Utilities.h"
 #include <string>
 using std::string;
 
@@ -6,7 +7,8 @@ const string str = "SolarEclipse";
 
 SolarEclipse::SolarEclipse() : SpecialEvent(str) {}
 
-void SolarEclipse::playEvent( Player &player) {
-    player.getJob()->applySolarEclipse(player);
+string SolarEclipse::playEvent( Player &player) {
+    int forceEffect = player.getJob()->applySolarEclipse(player);
+    return getSolarEclipseMessage(player, forceEffect);
 }
 
