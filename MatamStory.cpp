@@ -124,6 +124,13 @@ void MatamStory::playRound() {
 
 bool MatamStory::isGameOver() const {
     /*===== TODO: Implement the game over condition =====*/
+    for (std::vector<shared_ptr<Player>>::iterator it = m_players.begin(); it != m_palyers.end();
+    ++it) {
+        if (it)
+        unique_ptr<Encounter> encounter(it->release());
+        m_subMonsters.push_back(std::move(encounter));
+    }
+    sumFields();
     return false; // Replace this line
     /*===================================================*/
 }
