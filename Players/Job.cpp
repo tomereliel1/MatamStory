@@ -18,10 +18,11 @@ string Job::getType() const {
     return m_type;
 }
 
-void Job::applySolarEclipse(Player &player) {
+int Job::applySolarEclipse(Player &player) {
     int currentForce= player.getForce();
     currentForce--;
     player.setForce(currentForce);
+    return -1;
 }
 
 void Job::playerWon(Player &player, int loot) const {

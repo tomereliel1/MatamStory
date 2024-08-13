@@ -10,9 +10,10 @@ private:
     int m_membersNum;
     std::vector<unique_ptr<Encounter>> m_subMonsters;
     void sumFields();
-    void updateCombatPower() override;
 public:
-    Pack(int membersNum ,std::vector<unique_ptr<Event>> subMonsters);
-    void playEvent( Player& player) override;
+    Pack(int membersNum ,std::vector<unique_ptr<Encounter>> subMonsters);
+    void updateCombatPower() override;
+
+    //string playEvent( Player& player) override;
 };
 

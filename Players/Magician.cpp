@@ -3,9 +3,10 @@
 const string str = "Magician";
 Magician::Magician(): Job(str){}
 
-void Magician::applySolarEclipse(Player &player) {
+int Magician::applySolarEclipse(Player &player) {
     int currentForce=player.getForce();
     currentForce++;
     player.setForce(currentForce);
+    return 1;
 }
 

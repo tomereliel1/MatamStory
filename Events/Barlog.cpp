@@ -10,6 +10,7 @@ Barlog::Barlog() : Encounter(str){
     m_damage = 9001;
 }
 
+/*
 void Barlog::playEvent(Player &player){
     if (player.getCombatPower() > m_combatPower){
         player.getJob()->playerWon(player);
@@ -17,7 +18,7 @@ void Barlog::playEvent(Player &player){
         player.playerLost(m_damage);
     }
     updateCombatPower();
-}
+}*/
 
 void Barlog::updateCombatPower(){
     m_combatPower += 2;

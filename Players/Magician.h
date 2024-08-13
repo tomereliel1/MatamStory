@@ -6,7 +6,7 @@ class Magician :public Job{
 public:
     explicit Magician();
 
-    void applySolarEclipse(Player &player) override;
+    int applySolarEclipse(Player &player) override;
 
     ~Magician() override = default;
 };

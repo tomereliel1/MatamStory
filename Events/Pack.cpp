@@ -1,4 +1,5 @@
 #include "Pack.h"
+#include "Utilities.h"
 #include <string>
 #include <memory>
 #include <vector>
@@ -6,17 +7,14 @@ using std::string;
 using std::unique_ptr;
 using std::vector;
 
-const string str = "Pack";
-Pack::Pack(int membersNum, vector<unique_ptr<Event>> subMonsters) : Encounter(str),
+Pack::Pack(int membersNum, vector<unique_ptr<Encounter>> subMonsters) :
+Encounter( "Pack of " +std::to_string(membersNum) + " members" ),
     m_membersNum(membersNum)
 {
-    for (std::vector<unique_ptr<Event>>::iterator it = subMonsters.begin(); it != subMonsters.end();
+    for (std::vector<unique_ptr<Encounter>>::iterator it = subMonsters.begin(); it != subMonsters.end();
     ++it) {
-        Encounter *encounterPtr = dynamic_cast<Encounter *>(it->release());
-        if (encounterPtr) {
-            unique_ptr<Encounter> encounter(encounterPtr);
-            m_subMonsters.push_back(std::move(encounter));
-        }
+        unique_ptr<Encounter> encounter(it->release());
+        m_subMonsters.push_back(std::move(encounter));
     }
     sumFields();
 }
@@ -32,15 +30,19 @@ void Pack::sumFields() {
         m_loot += monster->getLoot();
     }
 }
-
-void Pack::playEvent(Player &player){
+/*
+string Pack::playEvent(Player &player){
+    string message;
     if (player.getCombatPower() > m_combatPower){
-        player.getJob()->playerWon(player);
+        player.getJob()->playerWon(player, m_loot);
+        message = getEncounterWonMessage(player, m_loot);
     } else {
         player.playerLost(m_damage);
+        message = getEncounterLostMessage(player, m_damage);
     }
     updateCombatPower();
-}
+    return message;
+}*/
 
 void Pack::updateCombatPower(){
     int tempCombatPower = 0;
