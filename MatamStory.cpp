@@ -3,7 +3,7 @@
 
 #include "Utilities.h"
 
-
+#include <algorithm>
 #include <fstream>
 #include <sstream>
 
@@ -108,17 +108,21 @@ void MatamStory::playRound() {
     printRoundStart();
 
     /*===== TODO: Play a turn for each player =====*/
-
+    for (shared_ptr<Player>& player : m_players) {
+        playTurn(*player);
+        m_turnIndex++;
+    }
     /*=============================================*/
-
     printRoundEnd();
-
+    std::sort(m_leaderBoard.begin(), m_leaderBoard.end());
     printLeaderBoardMessage();
-
+    int i = 1;
+    for (shared_ptr<Player>& player : m_leaderBoard) {
+        printLeaderBoardEntry(i, *player);
+    }
     /*===== TODO: Print leaderboard entry for each player using "printLeaderBoardEntry" =====*/
 
     /*=======================================================================================*/
-
     printBarrier();
 }
 

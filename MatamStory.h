@@ -26,7 +26,7 @@ private:
     EventFactory eventFactory;
     std::vector<std::shared_ptr<Player>> m_players;
     std::vector<std::unique_ptr<Event>> m_events;
-    std::vector<std::shared_ptr<Player>> leaderBoard;
+    std::vector<std::shared_ptr<Player>> m_leaderBoard;
 
  std::shared_ptr<Player> createPlayer(std::istream& playersStream);
 
