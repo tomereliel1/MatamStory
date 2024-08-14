@@ -11,6 +11,7 @@
 #include <sstream>
 #include <vector>
 #include <iostream>
+
 using std::string;
 using std::unique_ptr;
 
@@ -25,11 +26,13 @@ EventFactory::EventFactory() {
 unique_ptr<Event> EventFactory::create(std::istream &file) const {
     std::string word;
     file >> word;
-    if (word == "Pack"){
+    if (word == "Pack") {
         return createPack(file);
-    } else if (m_creators.find(word) != m_creators.end()){
+    }
+    else if (m_creators.find(word) != m_creators.end()) {
         return m_creators.find(word)->second();
-    } else {
+    }
+    else {
         throw std::runtime_error("Invalid Events File");
     }
 }
@@ -38,14 +41,18 @@ unique_ptr<Event> EventFactory::createPack(std::istream &file) const {
     std::vector<unique_ptr<Encounter>> subMonsters;
     int monsterNumber;
     file >> monsterNumber;
-    string  word;
-    for (int i = 0 ; i < monsterNumber; i++){
+    if (file.fail() || monsterNumber < 2) {
+        throw std::runtime_error("Invalid Events File");
+    }
+    string word;
+    for (int i = 0; i < monsterNumber; i++) {
         unique_ptr<Event> event = create(file);
-        if (Encounter* encounter = dynamic_cast<Encounter*>(event.get())){
+        if (Encounter *encounter = dynamic_cast<Encounter *>(event.get())) {
             subMonsters.push_back(std::unique_ptr<Encounter>(encounter));
             event.release();
-        } else {
-            throw std::runtime_error("Invalid Event File");
+        }
+        else {
+            throw std::runtime_error("Invalid Events File");
         }
     }
     return std::make_unique<Pack>(monsterNumber, std::move(subMonsters));

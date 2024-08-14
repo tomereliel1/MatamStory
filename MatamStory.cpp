@@ -1,79 +1,81 @@
-
 #include "MatamStory.h"
-
 #include "Utilities.h"
-
 #include <algorithm>
-#include <fstream>
 #include <sstream>
-
-MatamStory::MatamStory(std::istream& eventsStream, std::istream& playersStream)
-    : m_turnIndex(1), jobFactory(), characterFactory(), eventFactory() {
+#include <string>
+MatamStory::MatamStory(std::istream &eventsStream, std::istream &playersStream)
+        : m_turnIndex(1), jobFactory(), characterFactory(), eventFactory() {
     int playersNum = 0;
     try {
+        int eventNum = 0;
+        while (!eventsStream.eof()) {
+            std::unique_ptr<Event> event = createEvent(eventsStream);
+            if (event) {
+                m_events.push_back(std::move(event));
+            }
+            eventNum++;
+        }
+        if (eventNum < 2) {
+            throw std::runtime_error("Invalid Events File");
+        }
         while (!playersStream.eof()) {
             std::shared_ptr<Player> player = createPlayer(playersStream);
             if (player) {
                 m_players.push_back(player);
                 playersNum++;
             }
-            if (playersNum > 6){
-                throw std::runtime_error("Invalid Event File");
+            if (playersNum > 6) {
+                throw std::runtime_error("Invalid Players File");
             }
         }
-
-        if (playersNum < 2){
-            throw std::runtime_error("Invalid Event File");
+        if (playersNum < 2) {
+            throw std::runtime_error("Invalid Players File");
         }
-
         m_leaderBoard = m_players;
-
-        while (!eventsStream.eof()) {
-            std::unique_ptr<Event> event = createEvent(eventsStream);
-            if (event) {
-                m_events.push_back(std::move(event));
-            }
-        }
-    }
-    catch(const std::runtime_error& error) {
+    } catch (const std::runtime_error &error) {
         throw error;
     }
 }
 
-std::shared_ptr<Player> MatamStory::createPlayer(std::istream& playersStream) {
+std::shared_ptr<Player> MatamStory::createPlayer(std::istream &playersStream) {
     string name, jobType, characterType;
-
     try {
-        playersStream >> name >> jobType >> characterType ;
-
+        playersStream >> name >> jobType >> characterType;
+        unsigned int i;
+        for (i = 0; i < name.size(); i++) {
+            if (i > 15 || name[i] < 'A' || name[i] > 'z') {
+                throw std::runtime_error("Invalid Players File");
+            }
+        }
+        if (i < 3) {
+            throw std::runtime_error("Invalid Players File");
+        }
         std::shared_ptr<Job> job = jobFactory.create(jobType);
         std::shared_ptr<Character> character = characterFactory.create(characterType);
 
         return std::make_shared<Player>(name, job, character);
-    } catch(const std::runtime_error& error) {
+    } catch (const std::runtime_error &error) {
         throw error;
     }
 
 }
 
-std::unique_ptr<Event> MatamStory::createEvent(std::istream& eventsStream) {
+std::unique_ptr<Event> MatamStory::createEvent(std::istream &eventsStream) {
     try {
         return eventFactory.create(eventsStream);
-    }  catch(const std::runtime_error& error) {
+    } catch (const std::runtime_error &error) {
         throw error;
     }
 }
 
 
-void MatamStory::playTurn(Player& player) {
+void MatamStory::playTurn(Player &player) {
 
     if (m_events.empty()) {
-        // end the game
         return;
     }
-    int spot = (m_turnIndex-1) % m_events.size();
-    //std::cout << "Spot is" << spot << std::endl << std::endl;
-    std::unique_ptr<Event>& currentEvent = m_events[spot];
+    int spot = (m_turnIndex - 1) % m_events.size();
+    std::unique_ptr<Event> &currentEvent = m_events[spot];
 
     printTurnDetails(m_turnIndex, player, *currentEvent);
 
@@ -90,18 +92,20 @@ void MatamStory::playRound() {
     printRoundStart();
 
     /*===== TODO: Play a turn for each player =====*/
-    for (shared_ptr<Player>& player : m_players) {
-        if (player->getHealthPoints()!= 0){
+    for (shared_ptr<Player> &player: m_players) {
+        if (player->getHealthPoints() != 0) {
             playTurn(*player);
         }
     }
     /*=============================================*/
     printRoundEnd();
-    std::sort(m_leaderBoard.begin(), m_leaderBoard.end(), [](const shared_ptr<Player>& firstPlayer,
-            const shared_ptr<Player>& secondPlayer) {return !(*firstPlayer < *secondPlayer);});
+    std::sort(m_leaderBoard.begin(), m_leaderBoard.end(), [](const shared_ptr<Player> &firstPlayer,
+                                                             const shared_ptr<Player> &secondPlayer) {
+        return !(*firstPlayer < *secondPlayer);
+    });
     printLeaderBoardMessage();
     int i = 1;
-    for (shared_ptr<Player>& player : m_leaderBoard) {
+    for (shared_ptr<Player> &player: m_leaderBoard) {
         printLeaderBoardEntry(i++, *player);
     }
     /*===== TODO: Print leaderboard entry for each player using "printLeaderBoardEntry" =====*/
@@ -111,12 +115,12 @@ void MatamStory::playRound() {
 }
 
 bool MatamStory::isGameOver() const {
-    if (hasWinner()){
+    if (hasWinner()) {
         return true;
     }
     bool allHpZeros = true;
-    for (const shared_ptr<Player>& player : m_players) {
-        if (player->getHealthPoints() != 0){
+    for (const shared_ptr<Player> &player: m_players) {
+        if (player->getHealthPoints() != 0) {
             allHpZeros = false;
         }
     }
@@ -127,8 +131,8 @@ void MatamStory::play() {
 
     printStartMessage();
     int i = 1;
-    for (shared_ptr<Player>& player : m_players) {
-        printStartPlayerEntry(i++,*player);
+    for (shared_ptr<Player> &player: m_players) {
+        printStartPlayerEntry(i++, *player);
     }
 
     printBarrier();
@@ -141,7 +145,8 @@ void MatamStory::play() {
 
     if (hasWinner()) {
         printWinner(*getWinner());
-    } else {
+    }
+    else {
         printNoWinners();
     }
 
@@ -149,7 +154,7 @@ void MatamStory::play() {
 
 bool MatamStory::hasWinner() const {
 
-    for (const auto& player : m_leaderBoard) {
+    for (const auto &player: m_leaderBoard) {
         if (player->getLevel() == 10) {
             return true;
         }
