@@ -16,7 +16,6 @@ JobFactory::JobFactory() {
 }
 
 shared_ptr<Job> JobFactory::create(const string& type){
-    //std::cout << "Job is " << type << std::endl;
     if (m_jobs.find(type) != m_jobs.end()){
         return m_jobs[type];
     } else {
