@@ -1,10 +1,23 @@
 #pragma once
+
 #include "Encounter.h"
-#include <string>
+
 using std::string;
-class Snail :public Encounter{
+
+/**
+ * Snail - represents an Snail Encounter type
+ */
+class Snail : public Encounter {
 public:
+    /**
+     * Constructor - creates an Snail Encounter
+     */
     Snail();
+
+    /**
+     * Destructor - default destructor
+     */
+    ~Snail() override = default ;
 
 };
 

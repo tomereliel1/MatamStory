@@ -1,5 +1,7 @@
 #pragma once
+
 #include <string>
+
 using std::string;
 
 class Player; // Forward declaration of the Player class
@@ -19,7 +21,7 @@ public:
      * @param type - the type of the job
      * @param closeRanged - whether the job is close range , default false
      */
-    explicit Job(const string& type, bool closeRanged = false);
+    explicit Job(const string &type, bool closeRanged = false);
 
     /**
      * Gets the maximum health points for the job
@@ -78,6 +80,6 @@ public:
      * @param player - the player who lost
      * @param damage - the amount of damage the player taken
      */
-    void playerLost(Player& player, int damage);
+    void playerLost(Player &player, int damage);
 
 };

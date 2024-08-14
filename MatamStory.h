@@ -17,9 +17,10 @@ using std::shared_ptr;
 using std::unique_ptr;
 using std::string;
 
-
+//The game manager class
 class MatamStory{
 private:
+    //count turns
     unsigned int m_turnIndex;
 
     //Factories
@@ -27,9 +28,13 @@ private:
     CharacterFactory characterFactory;
     EventFactory eventFactory;
 
-    //Data storages
+    //vector which contains the players in input order
     std::vector<std::shared_ptr<Player>> m_players;
+
+    //vector which contain the events in input order
     std::vector<std::unique_ptr<Event>> m_events;
+
+    //vector which contains the players in leading order
     std::vector<std::shared_ptr<Player>> m_leaderBoard;
 
 

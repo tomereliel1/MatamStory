@@ -1,6 +1,8 @@
 #pragma once
+
 #include "Character.h"
 #include <string>
+
 using std::string;
 
 /**

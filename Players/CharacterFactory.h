@@ -30,7 +30,7 @@ public:
      * @param type - the type of Character to create
      * @return - a shared pointer to the created Character object
      */
-    shared_ptr<Character> create(const string& type) override;
+    shared_ptr<Character> create(const string &type) override;
 
     /**
      * Destructor - default destructor for the CharacterFactory class

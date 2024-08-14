@@ -1,12 +1,13 @@
 #include "Job.h"
 #include "Player.h"
-Job::Job(const string& type, bool closeRanged): m_type(type), m_closeRanged(closeRanged){}
 
-int Job::getMaxHP() const{
+Job::Job(const string &type, bool closeRanged) : m_type(type), m_closeRanged(closeRanged) {}
+
+int Job::getMaxHP() const {
     return 100;
 }
 
-int Job::getCoins() const{
+int Job::getCoins() const {
     return 10;
 }
 
@@ -19,7 +20,7 @@ string Job::getType() const {
 }
 
 int Job::applySolarEclipse(Player &player) {
-    int currentForce= player.getForce();
+    int currentForce = player.getForce();
     currentForce--;
     player.setForce(currentForce);
     return -1;
@@ -28,10 +29,10 @@ int Job::applySolarEclipse(Player &player) {
 void Job::playerWon(Player &player, int loot) const {
     int currentLevel = player.getLevel();
     int currentCoins = player.getCoins();
-    if (m_closeRanged){
+    if (m_closeRanged) {
         int currentHP = player.getHealthPoints();
         currentHP -= 10;
-        if (currentHP < 0){
+        if (currentHP < 0) {
             currentHP = 0;
         }
         player.setHP(currentHP);
@@ -43,11 +44,12 @@ void Job::playerWon(Player &player, int loot) const {
 }
 
 
-void Job::playerLost(Player& player, int damage) {
+void Job::playerLost(Player &player, int damage) {
     int currentHP = player.getHealthPoints();
-    if (currentHP - damage < 0){
+    if (currentHP - damage < 0) {
         currentHP = 0;
-    } else {
+    }
+    else {
         currentHP -= damage;
     }
     player.setHP(currentHP);

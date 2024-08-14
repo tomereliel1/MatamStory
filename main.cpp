@@ -1,6 +1,5 @@
 #include <string>
 #include <iostream>
-#include <fstream>
 #include "MatamStory.h"
 
 using std::string;

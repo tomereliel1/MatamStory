@@ -1,11 +1,15 @@
 #include "Player.h"
 #include <string>
 #include <memory>
+
 using std::shared_ptr;
 using std::string;
 
 Player::Player(string name, shared_ptr<Job> job, shared_ptr<Character> character) : m_name(name),
-    m_level(1),m_force(5), m_job(job), m_character(character) {
+    m_level(1),
+    m_force(5),
+    m_job(job),
+    m_character(character) {
     m_maxHP = m_job->getMaxHP();
     m_currentHP = m_maxHP;
     m_coins = m_job->getCoins();
@@ -13,8 +17,8 @@ Player::Player(string name, shared_ptr<Job> job, shared_ptr<Character> character
 
 string Player::getDescription() const {
     string description = m_name + ", " + m_job->getType() + " with " + m_character->getType()
-            + " character (level " + std::to_string(m_level) + ", force " +
-            std::to_string(m_force) + ")";
+                         + " character (level " + std::to_string(m_level) + ", force " +
+                         std::to_string(m_force) + ")";
     return description;
 }
 
@@ -41,9 +45,11 @@ int Player::getMaxHealthPoints() const {
 int Player::getCoins() const {
     return m_coins;
 }
+
 int Player::getCombatPower() const {
     return m_job->getCombatPower(m_force, m_level);
 }
+
 shared_ptr<Job> Player::getJob() {
     return m_job;
 }
@@ -78,7 +84,7 @@ void Player::playerLost(int damage) {
     }
 }*/
 
- bool operator < (const Player& player1, const Player& player2) {
+bool operator<(const Player &player1, const Player &player2) {
     if (player1.m_level != player2.m_level) {
         return player1.m_level < player2.m_level;
     }

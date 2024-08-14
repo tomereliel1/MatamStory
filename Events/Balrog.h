@@ -1,11 +1,26 @@
 #pragma once
+
 #include "Encounter.h"
-#include <string>
-using std::string;
-class Balrog : public Encounter{
+
+/**
+ * Balrog- represents an Balrog Encounter type
+ */
+class Balrog : public Encounter {
 public:
+    /**
+     * Constructor - creates an Balrog Encounter
+     */
     Balrog();
+
+    /**
+     * Update the value of combatPower that raised after every fight
+     *
+     */
     void updateCombatPower() override;
-    //void playEvent(Player &player) override;
+
+    /**
+     * Destructor - default destructor
+     */
+     ~Balrog() override = default ;
 };
 

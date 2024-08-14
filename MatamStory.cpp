@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <sstream>
 #include <string>
+
 MatamStory::MatamStory(std::istream &eventsStream, std::istream &playersStream)
         : m_turnIndex(1), jobFactory(), characterFactory(), eventFactory() {
     int playersNum = 0;
@@ -91,7 +92,6 @@ void MatamStory::playRound() {
 
     printRoundStart();
 
-    /*===== TODO: Play a turn for each player =====*/
     for (shared_ptr<Player> &player: m_players) {
         if (player->getHealthPoints() != 0) {
             playTurn(*player);
@@ -108,7 +108,7 @@ void MatamStory::playRound() {
     for (shared_ptr<Player> &player: m_leaderBoard) {
         printLeaderBoardEntry(i++, *player);
     }
-    /*===== TODO: Print leaderboard entry for each player using "printLeaderBoardEntry" =====*/
+
 
     /*=======================================================================================*/
     printBarrier();

@@ -1,6 +1,8 @@
 #pragma once
+
 #include "Job.h"
 #include <string>
+
 using std::string;
 
 /**

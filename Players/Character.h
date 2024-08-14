@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+
 using std::string;
 
 /**
@@ -22,7 +23,7 @@ public:
      *
      * @param type - the type of the character
      */
-    explicit Character(const string& type);
+    explicit Character(const string &type);
 
     /**
      * Gets the type of the character

@@ -1,5 +1,4 @@
 #include "Snail.h"
-#include <string>
 using std::string;
 
 const string str = "Snail";
