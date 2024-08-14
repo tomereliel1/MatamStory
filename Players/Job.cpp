@@ -1,6 +1,6 @@
 #include "Job.h"
 #include "Player.h"
-Job::Job(const string& type): m_type(type){}
+Job::Job(const string& type, bool closeRanged): m_type(type), m_closeRanged(closeRanged){}
 
 int Job::getMaxHP() const{
     return 100;
@@ -28,8 +28,27 @@ int Job::applySolarEclipse(Player &player) {
 void Job::playerWon(Player &player, int loot) const {
     int currentLevel = player.getLevel();
     int currentCoins = player.getCoins();
+    if (m_closeRanged){
+        int currentHP = player.getHealthPoints();
+        currentHP -= 10;
+        if (currentHP < 0){
+            currentHP = 0;
+        }
+        player.setHP(currentHP);
+    }
     currentLevel++;
     currentCoins += loot;
     player.setLevel(currentLevel);
     player.setCoins(currentCoins);
+}
+
+
+void Job::playerLost(Player& player, int damage) {
+    int currentHP = player.getHealthPoints();
+    if (currentHP - damage < 0){
+        currentHP = 0;
+    } else {
+        currentHP -= damage;
+    }
+    player.setHP(currentHP);
 }

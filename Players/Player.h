@@ -81,7 +81,7 @@ public:
 
     void setCoins(const int& level);
 
-    void playerLost(int damage);
+    //void playerLost(int damage);
 
  friend bool operator < (const Player& player1, const Player& player2);
 

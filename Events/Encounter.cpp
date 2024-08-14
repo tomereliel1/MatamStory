@@ -24,7 +24,7 @@ string Encounter::playEvent(Player &player){
         player.getJob()->playerWon(player, m_loot);
         message = getEncounterWonMessage(player, m_loot);
     } else {
-        player.playerLost(m_damage);
+        player.getJob()->playerLost(player,m_damage);
         message = getEncounterLostMessage(player, m_damage);
     }
     updateCombatPower();

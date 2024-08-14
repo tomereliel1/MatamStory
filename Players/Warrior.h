@@ -9,6 +9,5 @@ public:
     int getMaxHP() const override;
 
     int getCombatPower(int force, int level) const override;
-    void playerWon(Player & player, int loot) const override;
     ~Warrior() override = default;
 };
