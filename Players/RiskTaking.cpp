@@ -2,18 +2,22 @@
 #include "Player.h"
 
 using std::string;
-const string str = "RiskTaking";
+const string RISK_TAKING_TYPE = "RiskTaking";
 
-RiskTaking::RiskTaking() : Character(str) {}
+const int POTION_COST = 5;
+const int POTION_EFFECT = 10;
+const int HP_AMOUNT = 50;
+
+RiskTaking::RiskTaking() : Character(RISK_TAKING_TYPE) {}
 
 int RiskTaking::applyPotionsMerchant(Player &player) {
     int potionsPurchased = 0;
     int currentCoins = player.getCoins();
     int currentHP = player.getHealthPoints();
 
-    if (currentCoins >= 5 && currentHP < 50) {
-        currentCoins -= 5;
-        currentHP += 10;
+    if (currentCoins >= POTION_COST && currentHP < HP_AMOUNT) {
+        currentCoins -= POTION_COST;
+        currentHP += POTION_EFFECT;
         player.setCoins(currentCoins);
         player.setHP(currentHP);
         potionsPurchased++;

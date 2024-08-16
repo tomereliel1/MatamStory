@@ -2,18 +2,21 @@
 #include "Player.h"
 
 using std::string;
-const string str = "Responsible";
+const string RESPONSIBLE = "Responsible";
 
-Responsible::Responsible() : Character(str) {}
+const int POTION_COST = 5;
+const int POTION_EFFECT = 10;
+
+Responsible::Responsible() : Character(RESPONSIBLE) {}
 
 int Responsible::applyPotionsMerchant(Player &player) {
     int potionsPurchased = 0;
     int currentCoins = player.getCoins();
     int currentHP = player.getHealthPoints();
     int maxHP = player.getMaxHealthPoints();
-    while (currentCoins >= 5 && currentHP < maxHP) {
-        currentCoins -= 5;
-        currentHP += 10;
+    while (currentCoins >= POTION_COST && currentHP < maxHP) {
+        currentCoins -= POTION_COST;
+        currentHP += POTION_EFFECT;
         potionsPurchased++;
     }
     if (currentHP > maxHP) {

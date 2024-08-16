@@ -4,6 +4,18 @@
 #include <sstream>
 #include <string>
 
+const string INVALID_PLAYERS_FILE = "Invalid Players File";
+const string INVALID_EVENTS_FILE = "Invalid Events File";
+
+
+const int MIN_NUMBER_OF_PLAYERS = 2;
+const int MAX_NUMBER_OF_PLAYERS = 6;
+const int MIN_NUMBER_OF_EVENTS = 2;
+const int MIN_LENGTH_OF_NAME = 3;
+const int MAX_LENGTH_OF_NAME = 15;
+const int LEVEL_TO_WIN = 10;
+
+
 MatamStory::MatamStory(std::istream &eventsStream, std::istream &playersStream)
         : m_turnIndex(1), jobFactory(), characterFactory(), eventFactory() {
     int playersNum = 0;
@@ -16,8 +28,8 @@ MatamStory::MatamStory(std::istream &eventsStream, std::istream &playersStream)
             }
             eventNum++;
         }
-        if (eventNum < 2) {
-            throw std::runtime_error("Invalid Events File");
+        if (eventNum < MIN_NUMBER_OF_EVENTS) {
+            throw std::runtime_error(INVALID_EVENTS_FILE);
         }
         while (!playersStream.eof()) {
             std::shared_ptr<Player> player = createPlayer(playersStream);
@@ -25,12 +37,12 @@ MatamStory::MatamStory(std::istream &eventsStream, std::istream &playersStream)
                 m_players.push_back(player);
                 playersNum++;
             }
-            if (playersNum > 6) {
-                throw std::runtime_error("Invalid Players File");
+            if (playersNum > MAX_NUMBER_OF_PLAYERS) {
+                throw std::runtime_error(INVALID_PLAYERS_FILE);
             }
         }
-        if (playersNum < 2) {
-            throw std::runtime_error("Invalid Players File");
+        if (playersNum < MIN_NUMBER_OF_PLAYERS) {
+            throw std::runtime_error(INVALID_PLAYERS_FILE);
         }
         m_leaderBoard = m_players;
     } catch (const std::runtime_error &error) {
@@ -44,12 +56,12 @@ std::shared_ptr<Player> MatamStory::createPlayer(std::istream &playersStream) {
         playersStream >> name >> jobType >> characterType;
         unsigned int i;
         for (i = 0; i < name.size(); i++) {
-            if (i > 15 || name[i] < 'A' || name[i] > 'z') {
-                throw std::runtime_error("Invalid Players File");
+            if (i > MAX_LENGTH_OF_NAME || name[i] < 'A' || name[i] > 'z') {
+                throw std::runtime_error(INVALID_PLAYERS_FILE);
             }
         }
-        if (i < 3) {
-            throw std::runtime_error("Invalid Players File");
+        if (i < MIN_LENGTH_OF_NAME) {
+            throw std::runtime_error(INVALID_PLAYERS_FILE);
         }
         std::shared_ptr<Job> job = jobFactory.create(jobType);
         std::shared_ptr<Character> character = characterFactory.create(characterType);
@@ -99,8 +111,9 @@ void MatamStory::playRound() {
     }
     /*=============================================*/
     printRoundEnd();
-    std::sort(m_leaderBoard.begin(), m_leaderBoard.end(), [](const shared_ptr<Player> &firstPlayer,
-                                                             const shared_ptr<Player> &secondPlayer) {
+    std::sort(m_leaderBoard.begin(), m_leaderBoard.end(),
+              [](const shared_ptr<Player> &firstPlayer,
+                      const shared_ptr<Player> &secondPlayer) {
         return !(*firstPlayer < *secondPlayer);
     });
     printLeaderBoardMessage();
@@ -155,7 +168,7 @@ void MatamStory::play() {
 bool MatamStory::hasWinner() const {
 
     for (const auto &player: m_leaderBoard) {
-        if (player->getLevel() == 10) {
+        if (player->getLevel() == LEVEL_TO_WIN) {
             return true;
         }
     }

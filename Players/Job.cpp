@@ -1,14 +1,19 @@
 #include "Job.h"
 #include "Player.h"
 
+const int DEFAULT_HP = 100;
+const int DEFAULT_COINS = 10;
+const int DEFAULT_SOLAR_ECLIPSE_EFFECT = -1;
+const int CLOSE_RANGED_ADDITIONAL_DAMAGE = 10;
+
 Job::Job(const string &type, bool closeRanged) : m_type(type), m_closeRanged(closeRanged) {}
 
 int Job::getMaxHP() const {
-    return 100;
+    return DEFAULT_HP;
 }
 
 int Job::getCoins() const {
-    return 10;
+    return DEFAULT_COINS;
 }
 
 int Job::getCombatPower(int force, int level) const {
@@ -23,7 +28,7 @@ int Job::applySolarEclipse(Player &player) {
     int currentForce = player.getForce();
     currentForce--;
     player.setForce(currentForce);
-    return -1;
+    return DEFAULT_SOLAR_ECLIPSE_EFFECT;
 }
 
 void Job::playerWon(Player &player, int loot) const {
@@ -31,7 +36,7 @@ void Job::playerWon(Player &player, int loot) const {
     int currentCoins = player.getCoins();
     if (m_closeRanged) {
         int currentHP = player.getHealthPoints();
-        currentHP -= 10;
+        currentHP -= CLOSE_RANGED_ADDITIONAL_DAMAGE;
         if (currentHP < 0) {
             currentHP = 0;
         }

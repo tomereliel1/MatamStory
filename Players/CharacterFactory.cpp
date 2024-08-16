@@ -7,9 +7,14 @@
 using std::string;
 using std::shared_ptr;
 
+const string RISK_TAKING_TYPE = "RiskTaking";
+const string RESPONSIBLE = "Responsible";
+const string INVALID_FILE = "Invalid Players File";
+
+
 CharacterFactory::CharacterFactory() {
-    m_characters["RiskTaking"] = make_shared<RiskTaking>();
-    m_characters["Responsible"] = make_shared<Responsible>();
+    m_characters[RISK_TAKING_TYPE] = make_shared<RiskTaking>();
+    m_characters[RESPONSIBLE] = make_shared<Responsible>();
 }
 
 shared_ptr<Character> CharacterFactory::create(const string &type) {
@@ -17,6 +22,6 @@ shared_ptr<Character> CharacterFactory::create(const string &type) {
         return m_characters[type];
     }
     else {
-        throw std::runtime_error("Invalid Players File");
+        throw std::runtime_error(INVALID_FILE);
     }
 }

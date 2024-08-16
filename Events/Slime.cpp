@@ -2,10 +2,14 @@
 
 using std::string;
 
-const string str = "Slime";
+const string SLIME_TYPE = "Slime";
 
-Slime::Slime() : Encounter(str) {
-    m_combatPower = 12;
-    m_loot = 5;
-    m_damage = 25;
+const int SLIME_POWER = 12;
+const int SLIME_LOOT = 5;
+const int SLIME_DAMAGE = 25;
+
+Slime::Slime() : Encounter(SLIME_TYPE) {
+    m_combatPower = SLIME_POWER;
+    m_loot = SLIME_LOOT;
+    m_damage = SLIME_DAMAGE;
 }

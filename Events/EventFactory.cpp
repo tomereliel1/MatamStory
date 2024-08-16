@@ -14,25 +14,35 @@
 using std::string;
 using std::unique_ptr;
 
+const string BALROG_TYPE = "Balrog";
+const string SNAIL_TYPE = "Snail";
+const string SLIME_TYPE = "Slime";
+const string PACK_TYPE = "Pack";
+const string SOLAR_ECLIPSE_TYPE = "SolarEclipse";
+const string POTIONS_MERCHANT_TYPE = "PotionsMerchant";
+const string INVALID_FILE = "Invalid Events File";
+
+const int MIN_NUMBER_IN_PACK = 2;
+
 EventFactory::EventFactory() {
-    m_creators["SolarEclipse"] = []() { return std::make_unique<SolarEclipse>(); };
-    m_creators["PotionsMerchant"] = []() { return std::make_unique<PotionsMerchant>(); };
-    m_creators["Snail"] = []() { return std::make_unique<Snail>(); };
-    m_creators["Slime"] = []() { return std::make_unique<Slime>(); };
-    m_creators["Balrog"] = []() { return std::make_unique<Balrog>(); };
+    m_creators[SOLAR_ECLIPSE_TYPE] = []() { return std::make_unique<SolarEclipse>(); };
+    m_creators[POTIONS_MERCHANT_TYPE] = []() { return std::make_unique<PotionsMerchant>(); };
+    m_creators[SNAIL_TYPE] = []() { return std::make_unique<Snail>(); };
+    m_creators[SLIME_TYPE] = []() { return std::make_unique<Slime>(); };
+    m_creators[BALROG_TYPE] = []() { return std::make_unique<Balrog>(); };
 }
 
 unique_ptr<Event> EventFactory::create(std::istream &file) const {
     std::string word;
     file >> word;
-    if (word == "Pack") {
+    if (word == PACK_TYPE) {
         return createPack(file);
     }
     else if (m_creators.find(word) != m_creators.end()) {
         return m_creators.find(word)->second();
     }
     else {
-        throw std::runtime_error("Invalid Events File");
+        throw std::runtime_error(INVALID_FILE);
     }
 }
 
@@ -40,8 +50,8 @@ unique_ptr<Event> EventFactory::createPack(std::istream &file) const {
     std::vector<unique_ptr<Encounter>> subMonsters;
     int monsterNumber;
     file >> monsterNumber;
-    if (file.fail() || monsterNumber < 2) {
-        throw std::runtime_error("Invalid Events File");
+    if (file.fail() || monsterNumber < MIN_NUMBER_IN_PACK) {
+        throw std::runtime_error(INVALID_FILE);
     }
     string word;
     for (int i = 0; i < monsterNumber; i++) {
@@ -51,7 +61,7 @@ unique_ptr<Event> EventFactory::createPack(std::istream &file) const {
             event.release();
         }
         else {
-            throw std::runtime_error("Invalid Events File");
+            throw std::runtime_error(INVALID_FILE);
         }
     }
     return std::make_unique<Pack>(monsterNumber, std::move(subMonsters));

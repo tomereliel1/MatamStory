@@ -3,9 +3,9 @@
 
 using std::string;
 
-const string str = "SolarEclipse";
+const string SOLAR_ECLIPSE_TYPE = "SolarEclipse";
 
-SolarEclipse::SolarEclipse() : SpecialEvent(str) {}
+SolarEclipse::SolarEclipse() : SpecialEvent(SOLAR_ECLIPSE_TYPE) {}
 
 string SolarEclipse::playEvent(Player &player) {
     int forceEffect = player.getJob()->applySolarEclipse(player);

@@ -1,14 +1,16 @@
 #include "Magician.h"
 #include "Player.h"
 
-const string str = "Magician";
+const string MAGICIAN_TYPE = "Magician";
+const int MAGICIAN_SOLAR_ECLIPSE_EFFECT = 1;
 
-Magician::Magician() : Job(str) {}
+
+Magician::Magician() : Job(MAGICIAN_TYPE) {}
 
 int Magician::applySolarEclipse(Player &player) {
     int currentForce = player.getForce();
     currentForce++;
     player.setForce(currentForce);
-    return 1;
+    return MAGICIAN_SOLAR_ECLIPSE_EFFECT;
 }
 

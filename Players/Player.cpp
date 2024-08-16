@@ -75,15 +75,6 @@ void Player::setCoins(const int &coins) {
     m_coins = coins;
 }
 
-/*
-void Player::playerLost(int damage) {
-    if (m_currentHP - damage < 0){
-        m_currentHP = 0;
-    } else {
-        m_currentHP -= damage;
-    }
-}*/
-
 bool operator<(const Player &player1, const Player &player2) {
     if (player1.m_level != player2.m_level) {
         return player1.m_level < player2.m_level;

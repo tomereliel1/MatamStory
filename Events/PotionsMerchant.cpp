@@ -4,9 +4,9 @@
 
 using std::string;
 
-const string str = "PotionsMerchant";
+const string POTIONS_MERCHANT_TYPE = "PotionsMerchant";
 
-PotionsMerchant::PotionsMerchant() : SpecialEvent(str) {}
+PotionsMerchant::PotionsMerchant() : SpecialEvent(POTIONS_MERCHANT_TYPE) {}
 
 string PotionsMerchant::playEvent(Player &player) {
     int potionsPurchased = player.getCharacter()->applyPotionsMerchant(player);

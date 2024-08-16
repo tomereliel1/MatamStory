@@ -1,11 +1,16 @@
 #include "Snail.h"
 using std::string;
 
-const string str = "Snail";
+const string SNAIL_TYPE = "Snail";
 
-Snail::Snail() : Encounter(str){
-    m_combatPower = 5;
-    m_loot = 2;
-    m_damage = 10;
+const int SNAIL_POWER = 5;
+const int SNAIL_LOOT = 2;
+const int SNAIL_DAMAGE = 10;
+
+
+Snail::Snail() : Encounter(SNAIL_TYPE){
+    m_combatPower = SNAIL_POWER;
+    m_loot = SNAIL_LOOT;
+    m_damage = SNAIL_DAMAGE;
 }
 

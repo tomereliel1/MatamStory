@@ -8,10 +8,15 @@
 using std::string;
 using std::shared_ptr;
 
+const string ARCHER_TYPE = "Archer";
+const string MAGICIAN_TYPE = "Magician";
+const string WARRIOR_TYPE = "Warrior";
+const string INVALID_FILE = "Invalid Players File";
+
 JobFactory::JobFactory() {
-    m_jobs["Warrior"] = make_shared<Warrior>();
-    m_jobs["Magician"] = make_shared<Magician>();
-    m_jobs["Archer"] = make_shared<Archer>();
+    m_jobs[WARRIOR_TYPE] = make_shared<Warrior>();
+    m_jobs[MAGICIAN_TYPE] = make_shared<Magician>();
+    m_jobs[ARCHER_TYPE] = make_shared<Archer>();
 }
 
 shared_ptr<Job> JobFactory::create(const string &type) {
@@ -19,7 +24,7 @@ shared_ptr<Job> JobFactory::create(const string &type) {
         return m_jobs[type];
     }
     else {
-        throw std::runtime_error("Invalid Players File");
+        throw std::runtime_error(INVALID_FILE);
     }
 }
 
