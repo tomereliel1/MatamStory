@@ -1,4 +1,4 @@
-#include "specialEvent.h"
+#include "SpecialEvent.h"
 
 using std::string;
 
