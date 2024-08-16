@@ -1,0 +1,944 @@
+* commit 71ca06cd0dbb56550a5b982d2f0a4c17f7b5ba7e
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Fri Aug 16 20:47:38 2024 +0300
+| 
+|     adding defines and dry.pdf
+| 
+|  Events/Balrog.cpp            |  14 +++++++++-----
+|  Events/EventFactory.cpp      |  30 ++++++++++++++++++++----------
+|  Events/PotionsMerchant.cpp   |   4 ++--
+|  Events/Slime.cpp             |  14 +++++++++-----
+|  Events/Snail.cpp             |  15 ++++++++++-----
+|  Events/SolarEclipse.cpp      |   4 ++--
+|  MatamStory.cpp               |  39 ++++++++++++++++++++++++++-------------
+|  Players/Archer.cpp           |   7 ++++---
+|  Players/CharacterFactory.cpp |  11 ++++++++---
+|  Players/Job.cpp              |  13 +++++++++----
+|  Players/JobFactory.cpp       |  13 +++++++++----
+|  Players/Magician.cpp         |   8 +++++---
+|  Players/Player.cpp           |   9 ---------
+|  Players/Responsible.cpp      |  13 ++++++++-----
+|  Players/RiskTaking.cpp       |  14 +++++++++-----
+|  Players/Warrior.cpp          |  16 +++++++++++-----
+|  dry.pdf                      | Bin 0 -> 71223 bytes
+|  17 files changed, 141 insertions(+), 83 deletions(-)
+| 
+* commit 59a0efd6228aff2618289c5c9844cc3af4db317a
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 14 21:57:40 2024 +0300
+| 
+|     adding comments
+| 
+|  Events/Balrog.cpp            | 16 ++---------
+|  Events/Balrog.h              | 23 ++++++++++++---
+|  Events/Encounter.cpp         | 17 ++++++------
+|  Events/Encounter.h           | 63 ++++++++++++++++++++++++++++++++++++++++--
+|  Events/Event.cpp             |  3 +-
+|  Events/Event.h               | 26 +++++++++++++++--
+|  Events/EventFactory.cpp      |  1 -
+|  Events/EventFactory.h        | 28 +++++++++++++++++++
+|  Events/Pack.cpp              | 32 ++++++---------------
+|  Events/Pack.h                | 32 +++++++++++++++++++--
+|  Events/PotionsMerchant.cpp   |  5 ++--
+|  Events/PotionsMerchant.h     | 19 +++++++++++++
+|  Events/Slime.cpp             |  4 +--
+|  Events/Slime.h               | 12 ++++++++
+|  Events/Snail.cpp             |  1 -
+|  Events/Snail.h               | 17 ++++++++++--
+|  Events/SolarEclipse.cpp      |  4 +--
+|  Events/SolarEclipse.h        | 23 +++++++++++++--
+|  Events/SpecialEvent.cpp      |  1 +
+|  Events/SpecialEvent.h        | 22 +++++++++++++--
+|  MatamStory.cpp               |  4 +--
+|  MatamStory.h                 |  9 ++++--
+|  Players/Archer.cpp           |  3 +-
+|  Players/Archer.h             |  2 ++
+|  Players/Character.cpp        |  3 +-
+|  Players/Character.h          |  3 +-
+|  Players/CharacterFactory.cpp | 10 +++----
+|  Players/CharacterFactory.h   |  2 +-
+|  Players/Factory.h            |  5 ++--
+|  Players/Job.cpp              | 20 ++++++++------
+|  Players/Job.h                |  6 ++--
+|  Players/JobFactory.cpp       | 10 +++----
+|  Players/Magician.cpp         |  6 ++--
+|  Players/Player.cpp           | 14 +++++++---
+|  Players/Responsible.cpp      | 11 ++++----
+|  Players/Responsible.h        |  2 ++
+|  Players/RiskTaking.cpp       |  9 +++---
+|  Players/RiskTaking.h         |  2 ++
+|  Players/Warrior.cpp          |  4 ++-
+|  main.cpp                     |  1 -
+|  40 files changed, 355 insertions(+), 120 deletions(-)
+|   
+*   commit 2b81d514fe3a3f18584fbec944fbd752f7c73082
+|\  Merge: d078725 456d97c
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Wed Aug 14 20:52:06 2024 +0300
+| | 
+| |     Merge branch 'main' of https://github.com/tomereliel1/HW4
+| | 
+| * commit 456d97ca7d0f1d1ab41ac2e5988788e206b38406
+| | Author: Meshisam <meshi_samon@Meshi>
+| | Date:   Wed Aug 14 08:14:42 2024 +0300
+| | 
+| |     added comments to the players folder
+| | 
+| |  Players/Archer.h           |  19 ++++++-
+| |  Players/Character.h        |  38 +++++++++++--
+| |  Players/CharacterFactory.h |  20 +++++++
+| |  Players/Factory.h          |  15 +++++-
+| |  Players/Job.h              |  66 ++++++++++++++++++++---
+| |  Players/JobFactory.h       |  20 ++++++-
+| |  Players/Magician.h         |  20 ++++++-
+| |  Players/Player.h           | 117 ++++++++++++++++++++++++++++++++++-------
+| |  Players/Responsible.h      |  18 ++++++-
+| |  Players/RiskTaking.h       |  18 ++++++-
+| |  Players/Warrior.h          |  35 +++++++++++-
+| |  11 files changed, 348 insertions(+), 38 deletions(-)
+| | 
+* | commit d07872574c10319cb8196b46258b41a29405c11a
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Wed Aug 14 20:44:26 2024 +0300
+| | 
+| |     debugging extra tests
+| | 
+| |  Events/EventFactory.cpp | 23 +++++++----
+| |  MatamStory.cpp          | 97 ++++++++++++++++++++++++---------------------
+| |  MatamStory.h            | 42 +++++++++++++++++++-
+| |  3 files changed, 106 insertions(+), 56 deletions(-)
+| | 
+* | commit 5c3a6d6164e80104623862d838d1c2fb9ab27ab8
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Wed Aug 14 20:43:20 2024 +0300
+| | 
+| |     removing cout line grom jobFactory
+| | 
+| |  Players/JobFactory.cpp | 1 -
+| |  1 file changed, 1 deletion(-)
+| | 
+* | commit d4d315c7ef7ce12f5d5beec17fd1f2135f7cccb2
+|/  Author: tomereliel1 <tomereliel@Tomer-pc>
+|   Date:   Wed Aug 14 20:42:04 2024 +0300
+|   
+|       moving playerLost to job +adding damage param
+|   
+|    .gitmodules          |  6 ++++++
+|    Events/Encounter.cpp |  2 +-
+|    MatamGenericTester   |  1 +
+|    Players/Job.cpp      | 21 ++++++++++++++++++++-
+|    Players/Job.h        |  6 ++++--
+|    Players/Player.cpp   |  6 +++---
+|    Players/Player.h     |  2 +-
+|    Players/Warrior.cpp  | 15 ++-------------
+|    Players/Warrior.h    |  1 -
+|    TechnionMatam        |  1 +
+|    10 files changed, 39 insertions(+), 22 deletions(-)
+| 
+* commit aee962f870957358dacb5d44553d121e8fb97a69
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Tue Aug 13 19:12:12 2024 +0300
+| 
+|     fixing pack.cpp
+| 
+|  Events/Pack.cpp | 2 +-
+|  1 file changed, 1 insertion(+), 1 deletion(-)
+| 
+* commit 942bb456ee5852baf953f7c401b3bf443804fc93
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Tue Aug 13 19:11:36 2024 +0300
+| 
+|     debuging tests 1 -3
+| 
+|  MatamStory.cpp | 34 +++++++++++++++++++---------------
+|  main.cpp       |  1 -
+|  2 files changed, 19 insertions(+), 16 deletions(-)
+| 
+* commit 8e86a060436cb2af688d580bff1ceecdcb444519
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Tue Aug 13 19:10:34 2024 +0300
+| 
+|     fixing typo's in factories
+| 
+|  Events/EventFactory.cpp      | 6 +++---
+|  Players/CharacterFactory.cpp | 1 +
+|  Players/JobFactory.cpp       | 3 ++-
+|  3 files changed, 6 insertions(+), 4 deletions(-)
+| 
+* commit 1516f42eaad17e400ab2e9c41cfa73f6604f1b6a
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Tue Aug 13 19:08:57 2024 +0300
+| 
+|     fixing typo at Balrog
+| 
+|  Events/{Barlog.cpp => Balrog.cpp} | 8 ++++----
+|  Events/{Barlog.h => Balrog.h}     | 4 ++--
+|  2 files changed, 6 insertions(+), 6 deletions(-)
+| 
+* commit c3526071392d77f451211c02502119e9e32f62e0
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Tue Aug 13 16:45:52 2024 +0300
+| 
+|     added hasWinner getWinner
+| 
+|  MatamStory.cpp | 319 ++++++++++++++++++++++++++++---------------------------
+|  1 file changed, 162 insertions(+), 157 deletions(-)
+| 
+* commit eb1b185bf674612657e9a06f44c837e4ac2dec61
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Tue Aug 13 15:03:47 2024 +0300
+| 
+|     fixing dead player check
+| 
+|  MatamStory.cpp | 6 ++++--
+|  1 file changed, 4 insertions(+), 2 deletions(-)
+|   
+*   commit f05bc20a400750d57865c8fee2324d30cdb50d93
+|\  Merge: 23922c0 ef730b1
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 14:54:24 2024 +0300
+| | 
+| |     resolving conflicts
+| | 
+| * commit ef730b1e577d4a982b4934e135bf2b2ffb62c494
+| | Author: Meshisam <meshi_samon@Meshi>
+| | Date:   Tue Aug 13 14:47:53 2024 +0300
+| | 
+| |     added play
+| | 
+| |  MatamStory.cpp | 40 +++++++++++++++++++---------------------
+| |  MatamStory.h   |  5 +++++
+| |  2 files changed, 24 insertions(+), 21 deletions(-)
+| | 
+* | commit 23922c0e7511b14874d7b6adab79245d9f2bba34
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 14:47:54 2024 +0300
+| | 
+| |     implementing playRound
+| | 
+| |  MatamStory.cpp | 16 ++++++++++------
+| |  MatamStory.h   |  2 +-
+| |  2 files changed, 11 insertions(+), 7 deletions(-)
+| | 
+* | commit 59eb09d88884cb10945169c43bd932c7445a0cc6
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 14:33:04 2024 +0300
+| | 
+| |     implementing isGameOver
+| | 
+| |  MatamStory.cpp | 20 ++++++++++----------
+| |  1 file changed, 10 insertions(+), 10 deletions(-)
+| | 
+* | commit 9639a5ecd3fd8afb00b1bad0044566f8e0e43097
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 14:18:18 2024 +0300
+| | 
+| |     returning main to supplied
+| | 
+| |  main.cpp | 5 +++--
+| |  1 file changed, 3 insertions(+), 2 deletions(-)
+| | 
+* | commit f8e92a5be8640db99f985bdb42c48bb9791deb59
+|/  Author: tomereliel1 <tomereliel@Tomer-pc>
+|   Date:   Tue Aug 13 14:16:51 2024 +0300
+|   
+|       start working on gameisover
+|   
+|    MatamStory.cpp | 7 +++++++
+|    MatamStory.h   | 2 ++
+|    2 files changed, 9 insertions(+)
+| 
+* commit 21e5fa32a66d6b56b40099879056152500511de0
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Tue Aug 13 14:11:45 2024 +0300
+| 
+|     added playTurn
+| 
+|  MatamStory.cpp | 28 +++++++++++++++++++++-------
+|  1 file changed, 21 insertions(+), 7 deletions(-)
+| 
+* commit b52afebb18fe0cc18801e1aba106494c0e9cd744
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Tue Aug 13 13:34:51 2024 +0300
+| 
+|     added excption
+| 
+|  MatamStory.cpp | 6 +++---
+|  1 file changed, 3 insertions(+), 3 deletions(-)
+| 
+* commit 705baf7a0edecc5bcb4feeacadb08b1f0fc83dd4
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Tue Aug 13 13:27:55 2024 +0300
+| 
+|     added createPlayer and createEvent
+| 
+|  MatamStory.cpp | 50 +++++++++++++++++++++++++++++++++-----------------
+|  1 file changed, 33 insertions(+), 17 deletions(-)
+| 
+* commit eb80259b9b823a2b30a61f01e189fc053995a189
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Tue Aug 13 12:38:42 2024 +0300
+| 
+|     added matamStory constructor
+| 
+|  MatamStory.cpp | 44 +++++++++++++++++++++++++++++++++++++++++++-
+|  MatamStory.h   | 21 +++++++++++++++++++++
+|  2 files changed, 64 insertions(+), 1 deletion(-)
+|   
+*   commit 04bf938a3f130802025f3ccd47803986b0f204d5
+|\  Merge: 92da028 469f699
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 12:29:55 2024 +0300
+| | 
+| |     Merge branch 'main' of https://github.com/tomereliel1/HW4
+| | 
+| * commit 469f699d1e1ddb4ca7a918de4ab5624e886c6603
+| | Author: Meshisam <meshi_samon@Meshi>
+| | Date:   Tue Aug 13 10:13:49 2024 +0300
+| | 
+| |     added Operator <
+| | 
+| |  Players/Player.cpp | 12 +++++++++++-
+| |  Players/Player.h   |  3 +++
+| |  2 files changed, 14 insertions(+), 1 deletion(-)
+| | 
+* | commit 92da02800e3e9be07a86ebca9d22b6374f593866
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 12:25:11 2024 +0300
+| | 
+| |     updating alpply solarEclipse to return string
+| | 
+| |  Events/SolarEclipse.cpp | 6 ++++--
+| |  Events/SolarEclipse.h   | 2 +-
+| |  2 files changed, 5 insertions(+), 3 deletions(-)
+| | 
+* | commit 90ffa47c988c989cd52b7fa8c2bbb3949d03c18c
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 12:24:22 2024 +0300
+| | 
+| |     fixing typo in PotionsMerchant
+| | 
+| |  Events/PotionsMerchant.cpp | 2 +-
+| |  1 file changed, 1 insertion(+), 1 deletion(-)
+| | 
+* | commit 2b47de99c2fade454f079f8c48db8653e13e2076
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 12:23:08 2024 +0300
+| | 
+| |     changing EventFactory to istream instead of ifstream
+| | 
+| |  Events/EventFactory.cpp | 22 ++++++++++++++--------
+| |  Events/EventFactory.h   |  4 ++--
+| |  2 files changed, 16 insertions(+), 10 deletions(-)
+| | 
+* | commit fce372b20144b892bc5d3795b7e05b30a5eb4f2c
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 12:20:59 2024 +0300
+| | 
+| |     implementing get descripstion in splecial event
+| | 
+| |  Events/SpecialEvent.cpp | 4 +++-
+| |  Events/SpecialEvent.h   | 1 +
+| |  2 files changed, 4 insertions(+), 1 deletion(-)
+| | 
+* | commit 3a86ba232dd8ce8a9f0c4c13ada7699fcbc84043
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 12:19:42 2024 +0300
+| | 
+| |     making getdescription abstract
+| | 
+| |  Events/Event.h | 6 +++---
+| |  1 file changed, 3 insertions(+), 3 deletions(-)
+| | 
+* | commit 69e4f9b7c65b1611f85ac96ee51cd160006d2398
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 12:18:30 2024 +0300
+| | 
+| |     deleting play event from pack and barlog creating UpdateCombat
+| | 
+| |  Events/Barlog.cpp    |  3 ++-
+| |  Events/Barlog.h      |  5 ++---
+| |  Events/Encounter.cpp | 19 ++++++++++++++++---
+| |  Events/Encounter.h   |  5 +++--
+| |  Events/Pack.cpp      | 26 ++++++++++++++------------
+| |  Events/Pack.h        |  7 ++++---
+| |  Players/Job.cpp      |  3 ++-
+| |  Players/Job.h        |  2 +-
+| |  Players/Magician.cpp |  3 ++-
+| |  Players/Magician.h   |  2 +-
+| |  10 files changed, 47 insertions(+), 28 deletions(-)
+| | 
+* | commit 2f2a9263bc024a33e59a067cf0a32cd64cf3a48c
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Tue Aug 13 12:00:05 2024 +0300
+| | 
+| |      addig mising ) to description
+| | 
+| |  Players/Player.cpp | 2 +-
+| |  1 file changed, 1 insertion(+), 1 deletion(-)
+| | 
+* | commit 3e1b96cad53a3d5366dec5efdd7d20bec1b93909
+| | Author: tomereliel1 <tomereliel@Tomer-pc>
+| | Date:   Mon Aug 12 21:04:03 2024 +0300
+| | 
+| |     adding loot to player at player won
+| | 
+| |  Players/Job.cpp     | 5 ++++-
+| |  Players/Job.h       | 2 +-
+| |  Players/Warrior.cpp | 9 ++++++---
+| |  Players/Warrior.h   | 2 +-
+| |  4 files changed, 12 insertions(+), 6 deletions(-)
+| | 
+* | commit 01846b05f58d21f194e7a4d517c48558bfe9364f
+|/  Author: tomereliel1 <tomereliel@Tomer-pc>
+|   Date:   Mon Aug 12 21:03:05 2024 +0300
+|   
+|       changing apply potionsMerchant to return number of potions purchased + get messege
+|   
+|    Events/PotionsMerchant.cpp |  7 ++++---
+|    Events/PotionsMerchant.h   |  2 +-
+|    Players/Character.h        |  2 +-
+|    Players/Responsible.cpp    | 11 +++++++----
+|    Players/Responsible.h      |  2 +-
+|    Players/RiskTaking.cpp     |  6 ++++--
+|    Players/RiskTaking.h       |  2 +-
+|    7 files changed, 19 insertions(+), 13 deletions(-)
+| 
+* commit 580dc842eb31365971025c60fbb3430dd940934e
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Mon Aug 12 20:47:07 2024 +0300
+| 
+|     creating EventFactory using map
+| 
+|  Events/EventFactory.cpp | 55 +++++++++++++++++------------------------------
+|  Events/EventFactory.h   | 12 +++++++----
+|  2 files changed, 28 insertions(+), 39 deletions(-)
+| 
+* commit e8f70fd3d15dcce38ed972f23b125c7e791609b3
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Mon Aug 12 20:46:24 2024 +0300
+| 
+|     updating Event ctor to default and playEvent for Pack and Barlog
+| 
+|  Events/Barlog.cpp          | 17 ++++++++++++++++-
+|  Events/Barlog.h            |  5 ++++-
+|  Events/Encounter.cpp       | 10 ++++++----
+|  Events/Encounter.h         |  6 +++---
+|  Events/Event.cpp           |  2 +-
+|  Events/Event.h             |  4 ++--
+|  Events/Pack.cpp            | 21 +++++++++++++++++++--
+|  Events/Pack.h              |  6 ++++--
+|  Events/PotionsMerchant.cpp |  6 +++---
+|  Events/PotionsMerchant.h   |  4 ++--
+|  Events/Slime.cpp           |  4 +++-
+|  Events/Slime.h             |  2 +-
+|  Events/Snail.cpp           |  4 +++-
+|  Events/Snail.h             |  2 +-
+|  Events/SolarEclipse.cpp    |  5 +++--
+|  Events/SolarEclipse.h      |  4 ++--
+|  Events/SpecialEvent.cpp    |  3 +--
+|  Events/SpecialEvent.h      |  2 +-
+|  18 files changed, 75 insertions(+), 32 deletions(-)
+| 
+* commit 8be4c2a87905de6e9ab0f391329a8c058ef761c4
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 11 23:12:25 2024 +0300
+| 
+|     starting to work on event factory
+| 
+|  Events/Event.cpp        |  6 +++++
+|  Events/EventFactory.cpp | 62 +++++++++++++++++++++++++++++++++++++++++++++++
+|  Events/EventFactory.h   | 14 +++++++++++
+|  3 files changed, 82 insertions(+)
+| 
+* commit 1a738cb1a4ac4860ab9b9fa24ac800a1b8ad663e
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 11 23:10:51 2024 +0300
+| 
+|     changing Player c'tor to adjust new Factories
+| 
+|  Players/Player.cpp | 35 +++++++++++++++++------------------
+|  Players/Player.h   | 16 ++++++++--------
+|  2 files changed, 25 insertions(+), 26 deletions(-)
+| 
+* commit 17039da6e41bc27afd5d6a456635ecbb4f8118fe
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 11 23:09:19 2024 +0300
+| 
+|     creating encounter c'tors and adding play event
+| 
+|  Events/Barlog.cpp    |  9 +++++++++
+|  Events/Encounter.cpp | 25 +++++++++++++++++++++++++
+|  Events/Encounter.h   |  5 +++++
+|  Events/Pack.cpp      | 35 +++++++++++++++++++++++++++++++++++
+|  Events/Pack.h        |  8 +++++++-
+|  Events/Slime.cpp     |  9 +++++++++
+|  Events/Snail.cpp     | 10 ++++++++++
+|  Events/Snail.h       |  1 +
+|  8 files changed, 101 insertions(+), 1 deletion(-)
+| 
+* commit 45316a4c9c1f1fd85ee0626960e71f9ae7947cd6
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 11 23:07:03 2024 +0300
+| 
+|     updating ctor's of characters
+| 
+|  Players/Responsible.cpp | 4 +++-
+|  Players/RiskTaking.cpp  | 4 +++-
+|  2 files changed, 6 insertions(+), 2 deletions(-)
+| 
+* commit ad55852322fc55044692ab81103c47848bda0116
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 11 23:06:10 2024 +0300
+| 
+|     changing Factory to map instead of ifs
+| 
+|  Players/Character.cpp        |  2 +-
+|  Players/Character.h          |  4 ++--
+|  Players/CharacterFactory.cpp | 21 +++++++++++++--------
+|  Players/CharacterFactory.h   | 11 ++++++-----
+|  Players/Factory.h            |  9 +--------
+|  Players/Job.cpp              | 11 +++++++++--
+|  Players/Job.h                |  7 ++++---
+|  Players/JobFactory.cpp       | 22 ++++++++++++++--------
+|  Players/JobFactory.h         | 16 ++++++++--------
+|  9 files changed, 58 insertions(+), 45 deletions(-)
+| 
+* commit 4bc3254bae84bb26bb31ad52f51e9648a15b1041
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 11 23:04:17 2024 +0300
+| 
+|     changing apply potionsmerchant
+| 
+|  Events/PotionsMerchant.cpp | 3 ++-
+|  1 file changed, 2 insertions(+), 1 deletion(-)
+| 
+* commit 042094175fcc89b4444970168239e2dd8b7f6c44
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 11 23:02:42 2024 +0300
+| 
+|     changing job ctor's
+| 
+|  Players/Archer.cpp   |  3 ++-
+|  Players/Archer.h     |  2 +-
+|  Players/Magician.cpp |  5 +++--
+|  Players/Magician.h   |  2 +-
+|  Players/Warrior.cpp  | 14 ++++++++++++--
+|  Players/Warrior.h    |  4 ++--
+|  6 files changed, 21 insertions(+), 9 deletions(-)
+| 
+* commit 5d2dea99a381a9175660dbd74f965a3335194e98
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sat Aug 10 20:41:43 2024 +0300
+| 
+|     creating cpp files
+| 
+|  Events/PotionsMerchant.cpp | 2 ++
+|  Events/SolarEclipse.cpp    | 1 +
+|  Events/SpecialEvent.cpp    | 1 +
+|  3 files changed, 4 insertions(+)
+| 
+* commit dde094c03831b94dec59a387840293e3a6b7115f
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sat Aug 10 21:03:29 2024 +0300
+| 
+|     returning ctor to get string &
+| 
+|  Events/Barlog.h            |  2 +-
+|  Events/Encounter.h         |  2 +-
+|  Events/Event.h             |  2 +-
+|  Events/Pack.h              |  4 ++--
+|  Events/PotionsMerchant.cpp |  8 ++------
+|  Events/PotionsMerchant.h   | 10 ++++------
+|  Events/Slime.h             |  3 +--
+|  Events/SolarEclipse.cpp    |  5 +----
+|  Events/SolarEclipse.h      | 10 ++++------
+|  Events/SpecialEvent.h      |  4 ++--
+|  Players/Job.cpp            |  2 +-
+|  Players/Job.h              |  2 +-
+|  Players/Magician.cpp       |  2 +-
+|  Players/Magician.h         |  2 +-
+|  14 files changed, 23 insertions(+), 35 deletions(-)
+| 
+* commit c6e0494049fd2f7be281d59a116014fcd087f6d1
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Fri Aug 9 21:26:25 2024 +0300
+| 
+|     added changes
+| 
+|  Players/Character.h | 2 +-
+|  Players/Warrior.h   | 2 --
+|  2 files changed, 1 insertion(+), 3 deletions(-)
+| 
+* commit 494fe8419a29824f5169c848c548a0500e326f29
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Fri Aug 9 21:18:07 2024 +0300
+| 
+|     added PlayEvent in everything that is affected by special event
+| 
+|  Events/Event.h           |  4 +++-
+|  Events/PotionsMerchant.h | 24 ++++++++++++------------
+|  Events/SolarEclipse.h    | 17 +++++++++++------
+|  Events/SpecialEvent.cpp  | 10 +++++++---
+|  Events/SpecialEvent.h    | 15 +++++++++------
+|  Players/Character.h      |  2 ++
+|  Players/Job.cpp          |  8 +++++++-
+|  Players/Job.h            |  2 ++
+|  Players/Magician.cpp     |  7 +++++++
+|  Players/Magician.h       |  2 ++
+|  Players/Player.cpp       | 12 +++++++++++-
+|  Players/Player.h         |  4 ++++
+|  Players/Responsible.cpp  | 15 +++++++++++++++
+|  Players/Responsible.h    |  2 ++
+|  Players/RiskTaking.cpp   | 11 +++++++++++
+|  Players/RiskTaking.h     |  2 ++
+|  Players/Warrior.h        |  3 +++
+|  17 files changed, 110 insertions(+), 30 deletions(-)
+| 
+* commit 6f15f5e52a676fc6be9f4ede8a9b73cb4bd57d57
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Fri Aug 9 21:05:41 2024 +0300
+| 
+|     added SolarEclipse.cpp and PotionsMerchant.cpp
+| 
+|  Events/PostionsMerchant.h  |  8 --------
+|  Events/PotionsMerchant.cpp | 14 ++++++++++++++
+|  Events/PotionsMerchant.h   | 12 ++++++++++++
+|  Events/SolarEclipse.cpp    | 13 +++++++++++++
+|  Events/SpecialEvent.cpp    |  3 +++
+|  5 files changed, 42 insertions(+), 8 deletions(-)
+| 
+* commit 5d18e45ce6024ff2d1320550448514b4232406bc
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Fri Aug 9 15:45:35 2024 +0300
+| 
+|     Updatting Events Fields and ctor
+| 
+|  Events/Barlog.h    | 15 ++++++++-------
+|  Events/Encounter.h | 19 ++++++++++++-------
+|  Events/Event.h     | 10 ++++++++--
+|  Events/Pack.h      | 10 ++++++++++
+|  Events/Slime.h     | 15 ++++++++-------
+|  Events/Snail.h     | 15 ++++++++-------
+|  6 files changed, 54 insertions(+), 30 deletions(-)
+| 
+* commit 344f5e9c87cd2c97dfb9cdfe75ce4ca0d3c8b579
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Fri Aug 9 15:44:11 2024 +0300
+| 
+|     change unique_ptr to only one shared_ptr for all players
+| 
+|  Players/Character.cpp        |  2 +-
+|  Players/Character.h          |  2 +-
+|  Players/CharacterFactory.cpp |  8 ++------
+|  Players/CharacterFactory.h   |  5 ++++-
+|  Players/Job.cpp              |  2 +-
+|  Players/Job.h                |  2 +-
+|  Players/JobFactory.cpp       |  9 +++------
+|  Players/JobFactory.h         |  9 +++++----
+|  Players/Player.cpp           | 20 +++++++++++++-------
+|  Players/Player.h             |  2 +-
+|  Players/Responsible.cpp      |  2 +-
+|  Players/Responsible.h        |  2 +-
+|  Players/RiskTaking.cpp       |  2 +-
+|  Players/RiskTaking.h         |  2 +-
+|  Players/Warrior.cpp          |  2 +-
+|  Players/Warrior.h            |  2 +-
+|  16 files changed, 38 insertions(+), 35 deletions(-)
+| 
+* commit d1a4adf31c9cf86382367d8b564cfa967bf7e6f4
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Thu Aug 8 00:27:13 2024 +0300
+| 
+|     adding setters
+| 
+|  Players/Player.cpp | 15 +++++++++++++++
+|  Players/Player.h   |  7 +++++++
+|  2 files changed, 22 insertions(+)
+| 
+* commit 2468b96e356e60223d28f3937755c25e231dbdcc
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Wed Aug 7 21:00:19 2024 +0300
+| 
+|     added Changes related to class Factory
+| 
+|  Players/Character.h    |   5 +-
+|  Players/JobFactory.cpp |  18 +++---
+|  Players/JobFactory.h   |  18 ++++--
+|  Players/Player.h       | 148 ++++++++++++++++++++++++-----------------------
+|  Players/Responsible.h  |  16 ++---
+|  Players/RiskTaking.h   |  16 ++---
+|  6 files changed, 119 insertions(+), 102 deletions(-)
+| 
+* commit 689e378994a07f38c7df0d634f2c1422e3750054
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Wed Aug 7 20:57:12 2024 +0300
+| 
+|     added Character.cpp
+| 
+|  Players/Character.cpp | 6 ++++++
+|  1 file changed, 6 insertions(+)
+| 
+* commit 65796814c41df32fb9d88c691ac91d3461c37ede
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Wed Aug 7 20:56:18 2024 +0300
+| 
+|     added class RiskTaking and class Responsible
+| 
+|  Players/Responsible.cpp | 6 ++++++
+|  Players/RiskTaking.cpp  | 6 ++++++
+|  2 files changed, 12 insertions(+)
+| 
+* commit fa9082a1e2b4d53f7b48e51bf93ccacdbd5bb2fe
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Wed Aug 7 20:54:41 2024 +0300
+| 
+|     added class CharacterFactory
+| 
+|  Players/CharacterFactory.cpp | 20 ++++++++++++++++++++
+|  Players/CharacterFactory.h   | 15 +++++++++++++++
+|  2 files changed, 35 insertions(+)
+| 
+* commit a0abb15b991cacc3c97bafa64f47a0e8c9377d9e
+| Author: Meshisam <meshi_samon@Meshi>
+| Date:   Wed Aug 7 20:53:00 2024 +0300
+| 
+|     added class Factory
+| 
+|  Players/Factory.h | 20 ++++++++++++++++++++
+|  1 file changed, 20 insertions(+)
+| 
+* commit c030ffb40db2c655d20055ffb0472c272cf17f52
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 7 12:18:39 2024 +0300
+| 
+|     creating Character derived classes files
+| 
+|  Players/Responsible.h | 8 ++++++++
+|  Players/RiskTaking.h  | 8 ++++++++
+|  2 files changed, 16 insertions(+)
+| 
+* commit 143ff1f7562826192021bb42a95a4dac2861decb
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 7 12:17:50 2024 +0300
+| 
+|     creating events files
+| 
+|  Events/Barlog.h           | 8 ++++++++
+|  Events/Encounter.h        | 8 ++++++++
+|  Events/Pack.h             | 0
+|  Events/PostionsMerchant.h | 8 ++++++++
+|  Events/Slime.h            | 8 ++++++++
+|  Events/Snail.h            | 8 ++++++++
+|  Events/SolarEclipse.h     | 8 ++++++++
+|  Events/SpecialEvent.h     | 8 ++++++++
+|  8 files changed, 56 insertions(+)
+| 
+* commit fcfda2d047a8fd5264ed870906bc076d7633b313
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 7 12:14:58 2024 +0300
+| 
+|     implement Job methods
+| 
+|  Players/Job.cpp | 18 ++++++++++++++++++
+|  1 file changed, 18 insertions(+)
+| 
+* commit 9e6da2631f3e64db0b570fb76b6c8dd40faa43b9
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 7 12:13:33 2024 +0300
+| 
+|     creating Factory for job creating
+| 
+|  Players/JobFactory.cpp | 24 ++++++++++++++++++++++++
+|  Players/JobFactory.h   | 10 ++++++++++
+|  2 files changed, 34 insertions(+)
+| 
+* commit 0ea7e4d444ef585670e1eeb550cfd7e6654f124d
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 7 12:12:57 2024 +0300
+| 
+|     creating derived class of Job - Magician
+| 
+|  Players/Magician.cpp |  3 +++
+|  Players/Magician.h   | 10 ++++++++++
+|  2 files changed, 13 insertions(+)
+| 
+* commit ea03da2e708e1dfe11b6241e9a3e38621f49ff87
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 7 12:12:37 2024 +0300
+| 
+|     creating derived class of Job - Archer
+| 
+|  Players/Archer.cpp |  7 +++++++
+|  Players/Archer.h   | 12 ++++++++++++
+|  2 files changed, 19 insertions(+)
+| 
+* commit fd8d9b5c0aaf9a4f591245e5f0ee3ac1a9b4a7f7
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 7 12:12:12 2024 +0300
+| 
+|     creating derived class of Job - Warrior
+| 
+|  Players/Warrior.cpp | 11 +++++++++++
+|  Players/Warrior.h   | 13 +++++++++++++
+|  2 files changed, 24 insertions(+)
+| 
+* commit 183a1a17748bca9b39abb5b977c0174812771d20
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 7 12:11:10 2024 +0300
+| 
+|     adding getType methods
+| 
+|  Players/Character.h |  1 +
+|  Players/Job.h       | 21 ++-------------------
+|  2 files changed, 3 insertions(+), 19 deletions(-)
+| 
+* commit eb77991b49d7d8afa764d74568b63b73fe8b25b3
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 7 12:09:17 2024 +0300
+| 
+|     changing c'tor implementation and adding getJob
+| 
+|  Players/Player.cpp | 13 +++++++++----
+|  1 file changed, 9 insertions(+), 4 deletions(-)
+| 
+* commit 11b8d6c4eefbea39da0bb7934bbca875bc5d462d
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Wed Aug 7 12:08:29 2024 +0300
+| 
+|     changeing pointers to shared pointer and add JobFactory field
+| 
+|  Players/Player.h | 15 ++++++++++-----
+|  1 file changed, 10 insertions(+), 5 deletions(-)
+| 
+* commit 0453c004f33b94005c1f3aa2f6eb7d36751920bd
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Mon Aug 5 15:07:00 2024 +0300
+| 
+|     adding initial values per job
+| 
+|  Players/Job.h | 33 +++++++++++++++++++++++++++++++++
+|  1 file changed, 33 insertions(+)
+| 
+* commit 361814fce02239b8b248a641cac385e707e2f918
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Mon Aug 5 15:05:27 2024 +0300
+| 
+|     change player's fields and constructor
+| 
+|  Players/Player.cpp | 21 +++++++++++++++++++--
+|  Players/Player.h   | 20 +++++++++++++-------
+|  2 files changed, 32 insertions(+), 9 deletions(-)
+| 
+* commit 6b165a12e56c2ad79f247952d2d560ddcd19c615
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 4 23:12:41 2024 +0300
+| 
+|     adding Character.h file and fixing player's get description + adding character's getType function
+| 
+|  Players/Character.h | 8 ++++++++
+|  Players/Player.cpp  | 6 ++++++
+|  Players/Player.h    | 8 ++++++--
+|  3 files changed, 20 insertions(+), 2 deletions(-)
+| 
+* commit 89be09b0e65475c697d5857f5ebedf4485a68f3d
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 4 19:20:26 2024 +0300
+| 
+|     adding getCoins
+| 
+|  Players/Player.cpp | 4 ++++
+|  1 file changed, 4 insertions(+)
+| 
+* commit 2aa679357a37596f5e2e09c28beb1eb89d2ed14d
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 4 19:19:25 2024 +0300
+| 
+|     adding getHealthPoints method
+| 
+|  Players/Player.cpp | 4 ++++
+|  1 file changed, 4 insertions(+)
+| 
+* commit de1ff323e9b234feaa3cab4374f31428aaa5b8f7
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 4 19:18:26 2024 +0300
+| 
+|     adding getForce method
+| 
+|  Players/Player.cpp | 3 +++
+|  1 file changed, 3 insertions(+)
+| 
+* commit 30b27a06bbf095a840e401fc46c7f041b0e01b43
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 4 19:17:08 2024 +0300
+| 
+|     adding getLevel method
+| 
+|  Players/Player.cpp | 4 ++++
+|  Players/Player.h   | 2 +-
+|  2 files changed, 5 insertions(+), 1 deletion(-)
+| 
+* commit c8fa6502e2d3e41c883f9b55de1196c374a6f17d
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 4 19:15:46 2024 +0300
+| 
+|     creating Player.cpp file and adding getName method
+| 
+|  Players/Player.cpp | 6 ++++++
+|  1 file changed, 6 insertions(+)
+| 
+* commit 1ebf2f96fb0523a71b8c5f2a28dc130dd870d125
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sun Aug 4 19:14:36 2024 +0300
+| 
+|     adding Player fields
+| 
+|  Players/Player.h | 7 +++++++
+|  1 file changed, 7 insertions(+)
+| 
+* commit ecc9258c6f2aa2c9c091a7738587e206586a1c14
+| Author: Adi Harif <adi.harif@campus.technion.ac.il>
+| Date:   Sun Aug 4 08:16:59 2024 +0300
+| 
+|     [format] Changes tests eol format to LF instead of CRLF
+| 
+|  tests/test1.events  | 8 ++++----
+|  tests/test1.players | 4 ++--
+|  tests/test2.events  | 6 +++---
+|  tests/test2.players | 4 ++--
+|  tests/test3.events  | 8 ++++----
+|  tests/test3.players | 2 +-
+|  6 files changed, 16 insertions(+), 16 deletions(-)
+| 
+* commit 6d0b58bcecef6fc2291c09f654a978cc382c3e31
+| Author: AdiHarif <adi.harif@campus.technion.ac.il>
+| Date:   Mon Jul 29 21:47:45 2024 +0300
+| 
+|     Adds supplied files
+| 
+|  Events/Event.h       |  14 +++++
+|  MatamStory.cpp       |  74 +++++++++++++++++++++++++
+|  MatamStory.h         |  55 +++++++++++++++++++
+|  Players/Player.h     |  51 +++++++++++++++++
+|  Utilities.cpp        | 117 +++++++++++++++++++++++++++++++++++++++
+|  Utilities.h          | 146 +++++++++++++++++++++++++++++++++++++++++++++++++
+|  main.cpp             |  40 ++++++++++++++
+|  tests/test1.events   |   5 ++
+|  tests/test1.expected |  96 ++++++++++++++++++++++++++++++++
+|  tests/test1.players  |   3 +
+|  tests/test2.events   |   4 ++
+|  tests/test2.expected |   1 +
+|  tests/test2.players  |   3 +
+|  tests/test3.events   |   5 ++
+|  tests/test3.expected |   1 +
+|  tests/test3.players  |   2 +
+|  16 files changed, 617 insertions(+)
+| 
+* commit beadb33ed4c7dd2da9d4078b9de6253232c67a46
+  Author: AdiHarif <adi.harif@campus.technion.ac.il>
+  Date:   Mon Jul 29 21:46:59 2024 +0300
+  
+      Initial Commit - Adds README.md file
+  
+   README.md | 7 +++++++
+   1 file changed, 7 insertions(+)
