@@ -1,3 +1,40 @@
+* commit 9859bfd37739f945f2aa69bd8e361a28c49c0bf6
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Sat Aug 17 15:40:33 2024 +0300
+| 
+|     addig roundup method to prevent code duplication and more defines + debug negative force
+| 
+|  Players/Job.cpp | 28 +++++++++++++++++-----------
+|  Players/Job.h   | 11 ++++++++++-
+|  2 files changed, 27 insertions(+), 12 deletions(-)
+| 
+* commit d63c6b0f81ccd3ae11a931590665ee9611ddd798
+| Author: tomereliel1 <tomereliel111@gmail.com>
+| Date:   Fri Aug 16 21:07:35 2024 +0300
+| 
+|     Delete .gitmodules
+| 
+|  .gitmodules | 6 ------
+|  1 file changed, 6 deletions(-)
+| 
+* commit 7502d9fbe9a38b65242be3d740fdbc3beb1dd925
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Fri Aug 16 20:57:42 2024 +0300
+| 
+|     fixing typo
+| 
+|  Events/SpecialEvent.cpp | 2 +-
+|  1 file changed, 1 insertion(+), 1 deletion(-)
+| 
+* commit d1bb9a8e06a10004833b147d2a73c7f133403ba7
+| Author: tomereliel1 <tomereliel@Tomer-pc>
+| Date:   Fri Aug 16 20:52:32 2024 +0300
+| 
+|     adding commit's log
+| 
+|  log.txt | 944 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 944 insertions(+)
+| 
 * commit 71ca06cd0dbb56550a5b982d2f0a4c17f7b5ba7e
 | Author: tomereliel1 <tomereliel@Tomer-pc>
 | Date:   Fri Aug 16 20:47:38 2024 +0300
