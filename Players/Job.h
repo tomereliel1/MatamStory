@@ -10,9 +10,18 @@ class Player; // Forward declaration of the Player class
  * Job - represents a job type that a player can have
  */
 class Job {
+private:
+    /**
+     * round up to 0 if the value is negative
+     *
+     * @param value - the value
+     * @param closeRanged - the value if it isn't negative and 0 otherwise
+     */
+    int roundUp(const int& value) const;
 protected:
     // m_type - the type of the job
     string m_type;
+    // whether the job is close ranged
     bool m_closeRanged;
 public:
     /**
@@ -80,6 +89,6 @@ public:
      * @param player - the player who lost
      * @param damage - the amount of damage the player taken
      */
-    void playerLost(Player &player, int damage);
+    void playerLost(Player &player, int damage) const;
 
 };

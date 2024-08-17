@@ -4,6 +4,9 @@
 const int DEFAULT_HP = 100;
 const int DEFAULT_COINS = 10;
 const int DEFAULT_SOLAR_ECLIPSE_EFFECT = -1;
+const int FORCE_NOT_CHANGE = 0;
+const int MIN_VALUE = 0;
+
 const int CLOSE_RANGED_ADDITIONAL_DAMAGE = 10;
 
 Job::Job(const string &type, bool closeRanged) : m_type(type), m_closeRanged(closeRanged) {}
@@ -26,6 +29,9 @@ string Job::getType() const {
 
 int Job::applySolarEclipse(Player &player) {
     int currentForce = player.getForce();
+    if (currentForce == MIN_VALUE){
+        return FORCE_NOT_CHANGE;
+    }
     currentForce--;
     player.setForce(currentForce);
     return DEFAULT_SOLAR_ECLIPSE_EFFECT;
@@ -36,10 +42,7 @@ void Job::playerWon(Player &player, int loot) const {
     int currentCoins = player.getCoins();
     if (m_closeRanged) {
         int currentHP = player.getHealthPoints();
-        currentHP -= CLOSE_RANGED_ADDITIONAL_DAMAGE;
-        if (currentHP < 0) {
-            currentHP = 0;
-        }
+        currentHP = roundUp(currentHP - CLOSE_RANGED_ADDITIONAL_DAMAGE);
         player.setHP(currentHP);
     }
     currentLevel++;
@@ -49,13 +52,16 @@ void Job::playerWon(Player &player, int loot) const {
 }
 
 
-void Job::playerLost(Player &player, int damage) {
+void Job::playerLost(Player &player, int damage) const{
     int currentHP = player.getHealthPoints();
-    if (currentHP - damage < 0) {
-        currentHP = 0;
-    }
-    else {
-        currentHP -= damage;
-    }
+    currentHP = roundUp(currentHP - damage);
     player.setHP(currentHP);
+}
+
+int Job::roundUp(const int &value) const {
+    if (value < 0){
+        return 0;
+    } else {
+        return value;
+    }
 }
